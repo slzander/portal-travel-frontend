@@ -55,6 +55,13 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         color: '#FFF'
+    },
+    ARTextStyle: {
+        fontFamily: 'Arial',
+        fontSize: 20,
+        color: '#ffffff',
+        textAlignVertical: 'center',
+        textAlign: 'center'
     }
 })
 
