@@ -9,7 +9,7 @@ import {
     KeyboardAvoidingView,
     StatusBar,
 } from 'react-native'
-import Styles from '../components/Styles'
+import { styles } from '../components/Styles'
 
 
 export default class Profile extends React.Component {
@@ -19,24 +19,24 @@ export default class Profile extends React.Component {
     
     render(){
         return(
-            <View style={Styles.container}>
+            <View style={styles.container}>
                 <StatusBar 
                     barStyle = 'light-content'
                 />
-                <View style={Styles.logoContainer}>
+                <View style={styles.logoContainer}>
                     <Image 
-                        style={Styles.logo}
+                        style={styles.logo}
                         source={require('../images/mountain.png')}
                     />
-                    <Text style={Styles.title}>Travel With Me</Text>
+                    <Text style={styles.title}>Travel With Me</Text>
                 </View>
                 <KeyboardAvoidingView 
                     behavior='padding'
-                    style={Styles.formContainer}
+                    style={styles.formContainer}
                 >
-                    <View style={Styles.loginContainer}>
+                    <View style={styles.loginContainer}>
                         <TextInput 
-                            style={Styles.input}
+                            style={styles.input}
                             placeholder='Username or Email'
                             // placeholderTextColor='rgba(255,255,255,0.7)'
                             returnKeyType='next'
@@ -47,7 +47,7 @@ export default class Profile extends React.Component {
                             autoCorrect={false} 
                             />
                         <TextInput 
-                            style={Styles.input} 
+                            style={styles.input} 
                             placeholder='Password'
                             placeholderTextColor='rgba(255,255,255,0.7)' 
                             onChangeText={password => this.setState({ password })}
@@ -55,18 +55,18 @@ export default class Profile extends React.Component {
                             returnKeyType='go'
                             ref={(input) => this.passwordInput = input} 
                         />
-                        <View style={Styles.buttonContainer}>
+                        <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                style={Styles.buttons}
+                                style={styles.buttons}
                                 onPress={() => this.props.changeScreen('dashboard')}
                             >
-                                <Text style={Styles.buttonText}>SIGN UP</Text>
+                                <Text style={styles.buttonText}>SIGN UP</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 
-                                style={Styles.buttons}
+                                style={styles.buttons}
                                 onPress={() => this.props.changeScreen('dashboard')}
                             >
-                                <Text style={Styles.buttonText}>LOG IN</Text>
+                                <Text style={styles.buttonText}>LOG IN</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

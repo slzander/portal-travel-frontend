@@ -78,7 +78,7 @@ export default class LoginForm extends React.Component {
                             </TouchableOpacity>
                             <TouchableOpacity 
                                 style={styles.buttons}
-                                onPress={() => this.props.changeScreen('profile')}
+                                onPress={() => this.props.changeScreen('dashboard')}
                             >
                                 <Text style={styles.buttonText}>LOG IN</Text>
                             </TouchableOpacity>

@@ -2,13 +2,6 @@
 
 import React from 'react';
 
-// import {
-//   StyleSheet,
-//   Text,
-//   TouchableOpacity,
-//   View
-// } from 'react-native';
-
 import {
   ViroARScene,
   ViroAmbientLight,
@@ -25,20 +18,26 @@ export default class MainScene extends React.Component {
       <>
         <ViroARScene>
           <ViroAmbientLight color="#ffffff" intensity={200}/>
-            <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}}>
-              <ViroPortal position={[0, 0, -1]} scale={[.1, .1, .1]}>
-              <Viro3DObject source={require('./portal_res/portal_ship/portal_ship.vrx')}
-                  resources={[require('./portal_res/portal_ship/portal_ship_diffuse.png'),
-                              require('./portal_res/portal_ship/portal_ship_normal.png'),
-                              require('./portal_res/portal_ship/portal_ship_specular.png')]}
-                  type="VRX"/>
-              </ViroPortal>
-              <Viro360Image source={require("./portal_res/IMG_0540.jpeg")} />
-            </ViroPortalScene>
-            {/* <ViroImage source={require('../../js/images/exit.png')} 
-                        position={[-3, -3, -5]} 
-                      //  onClick={this._pushNextScene}/>  
-                        onClick={() => this.props.changeScreen('dashboard')}/>   */}
+          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}}>
+            <ViroPortal position={[0, 0, -1]} scale={[.1, .1, .1]}>
+            <Viro3DObject source={require('./portal_res/portal_ship/portal_ship.vrx')}
+                resources={[require('./portal_res/portal_ship/portal_ship_diffuse.png'),
+                            require('./portal_res/portal_ship/portal_ship_normal.png'),
+                            require('./portal_res/portal_ship/portal_ship_specular.png')]}
+                type="VRX"/>
+            </ViroPortal>
+            <Viro360Image source={require("./portal_res/IMG_0540.jpeg")} />
+          </ViroPortalScene>
+          <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}}>
+            <ViroPortal position={[0, 0, 2]} scale={[.1, .1, .1]}>
+            <Viro3DObject source={require('./portal_res/portal_ship/portal_ship.vrx')}
+                resources={[require('./portal_res/portal_ship/portal_ship_diffuse.png'),
+                            require('./portal_res/portal_ship/portal_ship_normal.png'),
+                            require('./portal_res/portal_ship/portal_ship_specular.png')]}
+                type="VRX"/>
+            </ViroPortal>
+            <Viro360Image source={require("./portal_res/IMG_0540.jpeg")} />
+          </ViroPortalScene>
         </ViroARScene>
 
       </>
