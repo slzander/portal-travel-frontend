@@ -1,12 +1,13 @@
-// 'use strict';
+'use strict';
 
 import React from 'react';
 
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native';
+// import {
+//   StyleSheet,
+//   Text,
+//   TouchableOpacity,
+//   View
+// } from 'react-native';
 
 import {
   ViroARScene,
@@ -21,7 +22,7 @@ import {
 export default class MainScene extends React.Component {
   render(){
     return(
-      <View>
+      <>
         <ViroARScene>
           <ViroAmbientLight color="#ffffff" intensity={200}/>
             <ViroPortalScene passable={true} dragType="FixedDistance" onDrag={()=>{}}>
@@ -35,17 +36,12 @@ export default class MainScene extends React.Component {
               <Viro360Image source={require("./portal_res/IMG_0540.jpeg")} />
             </ViroPortalScene>
             {/* <ViroImage source={require('../../js/images/exit.png')} 
-                        position={[0, 0, -5]} 
+                        position={[-3, -3, -5]} 
                       //  onClick={this._pushNextScene}/>  
                         onClick={() => this.props.changeScreen('dashboard')}/>   */}
         </ViroARScene>
-        <TouchableOpacity 
-            style={styles.buttons}
-            onPress={() => this.props.changeScreen('dashboard')}
-        >
-            <Text style={styles.buttonText}>SIGN UP</Text>
-        </TouchableOpacity>
-      </View>
+
+      </>
     )
   }
 }

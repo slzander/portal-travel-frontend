@@ -9,6 +9,7 @@ import {
     KeyboardAvoidingView,
     StatusBar,
 } from 'react-native'
+import Styles from '../components/Styles'
 
 
 export default class Profile extends React.Component {
@@ -18,24 +19,24 @@ export default class Profile extends React.Component {
     
     render(){
         return(
-            <View style={styles.container}>
+            <View style={Styles.container}>
                 <StatusBar 
                     barStyle = 'light-content'
                 />
-                <View style={styles.logoContainer}>
+                <View style={Styles.logoContainer}>
                     <Image 
-                        style={styles.logo}
+                        style={Styles.logo}
                         source={require('../images/mountain.png')}
                     />
-                    <Text style={styles.title}>Travel With Me</Text>
+                    <Text style={Styles.title}>Travel With Me</Text>
                 </View>
                 <KeyboardAvoidingView 
                     behavior='padding'
-                    style={styles.formContainer}
+                    style={Styles.formContainer}
                 >
-                    <View style={styles.loginContainer}>
+                    <View style={Styles.loginContainer}>
                         <TextInput 
-                            style={styles.input}
+                            style={Styles.input}
                             placeholder='Username or Email'
                             // placeholderTextColor='rgba(255,255,255,0.7)'
                             returnKeyType='next'
@@ -46,7 +47,7 @@ export default class Profile extends React.Component {
                             autoCorrect={false} 
                             />
                         <TextInput 
-                            style={styles.input} 
+                            style={Styles.input} 
                             placeholder='Password'
                             placeholderTextColor='rgba(255,255,255,0.7)' 
                             onChangeText={password => this.setState({ password })}
@@ -54,18 +55,18 @@ export default class Profile extends React.Component {
                             returnKeyType='go'
                             ref={(input) => this.passwordInput = input} 
                         />
-                        <View style={styles.buttonContainer}>
+                        <View style={Styles.buttonContainer}>
                             <TouchableOpacity 
-                                style={styles.buttons}
+                                style={Styles.buttons}
                                 onPress={() => this.props.changeScreen('dashboard')}
                             >
-                                <Text style={styles.buttonText}>SIGN UP</Text>
+                                <Text style={Styles.buttonText}>SIGN UP</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 
-                                style={styles.buttons}
+                                style={Styles.buttons}
                                 onPress={() => this.props.changeScreen('dashboard')}
                             >
-                                <Text style={styles.buttonText}>LOG IN</Text>
+                                <Text style={Styles.buttonText}>LOG IN</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -74,48 +75,3 @@ export default class Profile extends React.Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3498db'
-    },
-    logoContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
-    logo: {
-        width: 100,
-        height: 100
-    },
-    title: {
-        color: '#FFF',
-        marginTop: 10,
-        width: 160,
-        textAlign: 'center',
-        opacity: 0.6
-    },
-    formContainer: {
-        padding: 20
-    },
-    input: {
-        height: 40,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        color: '#FFF',
-        marginBottom: 20,
-        paddingHorizontal: 10
-    },
-    loginContainer: {
-        marginBottom: 60
-    },
-    buttons: {
-        margin: 10,
-        backgroundColor: '#2980b9',
-        paddingVertical: 10,
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF'
-    }
-})

@@ -6,6 +6,8 @@ import Dashboard from './js/screens/Dashboard'
 import ARScreen from './js/screens/ARScreen'
 import MainScene from './js/ARPortals/MainScene'
 import Profile from './js/screens/Profile'
+import { styles } from './js/components/Styles'
+import Footer from './js/components/Footer'
 import {
   AppRegistry,
   Text,
@@ -13,6 +15,7 @@ import {
   StyleSheet,
   PixelRatio,
   TouchableHighlight,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -46,13 +49,22 @@ export default class ViroSample extends Component {
     
   getARScreen = () => {
     return (
-      <ViroARSceneNavigator 
-      // {...this.state.sharedProps}
-        initialScene={{scene: InitialARScene}}
-        changeScreen={this.changeScreen} />
-      // <MainScene
-      //  changeScreen={this.changeScreen}
-      // />
+      <View style={styles.ARView}>
+        <ViroARSceneNavigator 
+          style={styles.ARScene}
+          initialScene={{scene: InitialARScene}}
+          // changeScreen={this.changeScreen}
+       />
+        <Footer
+          changeScreen={this.changeScreen}
+        />
+        {/* <TouchableOpacity 
+          style={styles.buttons}
+          onPress={() => this.changeScreen('dashboard')}
+          >
+          <Text style={styles.buttonText}>SIGN UP</Text>
+        </TouchableOpacity> */}
+      </View>
     )
   }
     
@@ -88,10 +100,9 @@ export default class ViroSample extends Component {
       <>
         {this.getScreen()}
       </>
-      // {/* // <ViroARSceneNavigator {...this.state.sharedProps} */}
-      // {/* //   initialScene={{scene: InitialARScene}} /> */}
     )
   }
 }
+
 
 module.exports = ViroSample

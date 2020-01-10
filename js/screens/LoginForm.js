@@ -1,4 +1,5 @@
 import React from 'react'
+import { styles } from '../components/Styles'
 import { 
     StyleSheet, 
     View, 
@@ -62,7 +63,7 @@ export default class LoginForm extends React.Component {
                         <TextInput 
                             style={styles.input} 
                             placeholder='Password'
-                            placeholderTextColor='rgba(255,255,255,0.7)' 
+                            // placeholderTextColor='rgba(255,255,255,0.7)' 
                             onChangeText={password => this.setState({ password })}
                             secureTextEntry
                             returnKeyType='go'
@@ -77,7 +78,7 @@ export default class LoginForm extends React.Component {
                             </TouchableOpacity>
                             <TouchableOpacity 
                                 style={styles.buttons}
-                                onPress={() => this.props.changeScreen('dashboard')}
+                                onPress={() => this.props.changeScreen('profile')}
                             >
                                 <Text style={styles.buttonText}>LOG IN</Text>
                             </TouchableOpacity>
@@ -89,47 +90,46 @@ export default class LoginForm extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3498db'
-    },
-    logoContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
-    logo: {
-        width: 100,
-        height: 100
-    },
-    title: {
-        color: '#FFF',
-        marginTop: 10,
-        width: 160,
-        textAlign: 'center',
-        opacity: 0.6
-    },
-    formContainer: {
-        padding: 20
-    },
-    input: {
-        height: 40,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        color: '#FFF',
-        marginBottom: 20,
-        paddingHorizontal: 10
-    },
-    loginContainer: {
-        marginBottom: 60
-    },
-    buttons: {
-        margin: 10,
-        backgroundColor: '#2980b9',
-        paddingVertical: 10,
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF'
-    }
-})
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         backgroundColor: '#3498db'
+//     },
+//     logoContainer: {
+//         alignItems: 'center',
+//         flexGrow: 1,
+//         justifyContent: 'center'
+//     },
+//     logo: {
+//         width: 100,
+//         height: 100
+//     },
+//     title: {
+//         color: '#FFF',
+//         marginTop: 10,
+//         width: 160,
+//         textAlign: 'center',
+//         opacity: 0.6
+//     },
+//     formContainer: {
+//         padding: 20
+//     },
+//     input: {
+//         height: 40,
+//         backgroundColor: 'rgba(255,255,255,0.7)',
+//         color: '#FFF',
+//         marginBottom: 20,
+//         paddingHorizontal: 10
+//     },
+//     loginContainer: {
+//         marginBottom: 60
+//     },
+//     buttons: {
+//         margin: 10,
+//         backgroundColor: '#2980b9',
+//         paddingVertical: 10,
+//     },
+//     buttonText: {
+//         flex: 1
+//     }
+// })
