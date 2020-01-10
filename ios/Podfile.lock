@@ -1,0 +1,85 @@
+PODS:
+  - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/Logger (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GTMSessionFetcher/Core (1.1.6)
+  - GVRAudioSDK (1.120.0)
+  - GVRSDK (1.120.0):
+    - GoogleToolboxForMac/Logger (= 2.1.0)
+    - GTMSessionFetcher/Core (= 1.1.6)
+  - React (0.59.9):
+    - React/Core (= 0.59.9)
+  - react-native-safe-area-context (0.6.2):
+    - React
+  - React/Core (0.59.9):
+    - yoga (= 0.59.9.React)
+  - RNCMaskedView (0.1.5):
+    - React
+  - RNGestureHandler (1.5.3):
+    - React
+  - RNReanimated (1.4.0):
+    - React
+  - RNScreens (2.0.0-alpha.22):
+    - React
+  - ViroKit (1.0):
+    - GVRAudioSDK (= 1.120.0)
+    - GVRSDK (= 1.120.0)
+  - ViroReact (1.0)
+  - yoga (0.59.9.React)
+
+DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNScreens (from `../node_modules/react-native-screens`)
+  - ViroKit (from `../node_modules/react-viro/ios/dist/ViroRenderer/`)
+  - ViroReact (from `../node_modules/react-viro/ios/`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  trunk:
+    - GoogleToolboxForMac
+    - GTMSessionFetcher
+    - GVRAudioSDK
+    - GVRSDK
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
+  ViroKit:
+    :path: "../node_modules/react-viro/ios/dist/ViroRenderer/"
+  ViroReact:
+    :path: "../node_modules/react-viro/ios/"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GTMSessionFetcher: 6aacd0ab48ddf0c3633ab2642d792abfcad1b08a
+  GVRAudioSDK: 302f0a8f190d855868ea07f246ce4f9b44c392ae
+  GVRSDK: 0cb9d0ce06a84d698e61e3db9509766022dcf815
+  React: a86b92f00edbe1873a63e4a212c29b7a7ad5224f
+  react-native-safe-area-context: 25260c5d0b9c53fd7aa88e569e2edae72af1f6a3
+  RNCMaskedView: dd13f9f7b146a9ad82f9b7eb6c9b5548fcf6e990
+  RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
+  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
+  RNScreens: 6adf01eb4080f44af6cca551207c6b0505066857
+  ViroKit: b3c0e0d4a40c2e78d31bb09740a49cd8bf6bd68f
+  ViroReact: 7ec32276dcd1883662b4587eaedfff67f7fc3625
+  yoga: 03ff42a6f223fb88deeaed60249020d80c3091ee
+
+PODFILE CHECKSUM: 2878b9a81c53c05be6fa6eeae1ca882cf2740d25
+
+COCOAPODS: 1.8.4
