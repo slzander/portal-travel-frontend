@@ -11,6 +11,7 @@ import {
     Button
 } from 'react-native'
 import Gallery from './Gallery'
+import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles'
 
 
@@ -35,7 +36,12 @@ export default class Profile extends React.Component {
     }
 
     showUserImages = () => {
-        return <Text>Show user images here</Text>
+        // console.warn(this.props.userImages)
+        return (
+            <ImageContainer
+                images={this.props.userImages}
+            />
+        )
     }
 
     render(){

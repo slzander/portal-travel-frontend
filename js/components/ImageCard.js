@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 
 export default function ImageCard ({ image }) {
+    console.warn(image)
     return(
         <View style={styles.imageCard}>
             <Image 

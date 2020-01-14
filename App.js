@@ -29,13 +29,18 @@ const baseURL = 'https://ar-travel-app.herokuapp.com/'
 export default class ViroSample extends Component {
   state = {
     screen: '',
-    images: []
+    images: [],
+    userImages: []
   }
 
   componentDidMount(){
     fetch(`${baseURL}images`)
-        .then(response => response.json())
-        .then(images => this.setState({ images }))
+      .then(response => response.json())
+      .then(images => this.setState({ images }))
+    fetch(`${baseURL}user`)
+      .then(response => response.json())
+      // .then(users => console.warn(users[0].images))
+      .then(users => this.setState({ userImages : users[0].images }))
   }
 
   getLoginFormScreen = () => {
@@ -56,11 +61,12 @@ export default class ViroSample extends Component {
     
   getARScreen = () => {
     return (
-      <View style={styles.ARView}>
-        <ViroARSceneNavigator 
+      <View style={styles.containerWithFooter}>
+        {this.state.images.length > 0 ? <ViroARSceneNavigator 
           style={styles.ARScene}
           initialScene={{scene: InitialARScene}}
-       />
+          viroAppProps={this.state.userImages}
+       /> : console.warn('error')}
         <Footer
           changeScreen={this.changeScreen}
         />
@@ -69,10 +75,18 @@ export default class ViroSample extends Component {
   }
     
   getProfileScreen = () => {
+    // console.warn(this.state.userImages)
     return (
-      <Profile
-       changeScreen={this.changeScreen}
-      />
+      <View style={styles.containerWithFooter}>
+        {this.state.userImages.length > 0 ?
+        <Profile
+        changeScreen={this.changeScreen}
+        userImages={this.state.userImages}
+        /> : console.warn('error')}
+        <Footer
+          changeScreen={this.changeScreen}
+        />
+      </View>
     )
   }
 

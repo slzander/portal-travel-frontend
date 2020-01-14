@@ -7,9 +7,7 @@ const colors = {
 const win = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-    ARView: {
-        textAlign: 'center',
-        color: '#FFF',
+    containerWithFooter: {
         flex: 1
     },
     ARScene: {
