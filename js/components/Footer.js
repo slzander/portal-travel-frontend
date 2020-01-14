@@ -22,7 +22,7 @@ export default function Footer ({ changeScreen }) {
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.buttons}
-                onPress={() => changeScreen('dashboard')}
+                onPress={() => changeScreen('profile')}
                 >
                 <Text style={styles.buttonText}>Profile</Text>
             </TouchableOpacity>

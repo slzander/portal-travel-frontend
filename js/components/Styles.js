@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 const colors = {
     darkBlue: '#0c2461',
     lightBlue: '#4a69bd',
 }
+const win = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     ARView: {
@@ -62,6 +63,22 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         textAlignVertical: 'center',
         textAlign: 'center'
+    },
+    profileContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    chosenPhoto: {
+        width: 300,
+        height: 300
+    },
+    imageCard: {
+        marginBottom: 40
+    },
+    image: {
+        width: 360,
+        height: 200
     }
 })
 

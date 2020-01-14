@@ -169,6 +169,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React/React.framework"
   install_framework "${PODS_ROOT}/../../node_modules/react-viro/ios/dist/ViroRenderer/ViroKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-cameraroll/react_native_cameraroll.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-fetch-blob/react_native_fetch_blob.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-image-picker/react_native_image_picker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/yoga/yoga.framework"
 fi
@@ -181,6 +184,9 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/React/React.framework"
   install_framework "${PODS_ROOT}/../../node_modules/react-viro/ios/dist/ViroRenderer/ViroKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-cameraroll/react_native_cameraroll.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-fetch-blob/react_native_fetch_blob.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/react-native-image-picker/react_native_image_picker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/yoga/yoga.framework"
 fi

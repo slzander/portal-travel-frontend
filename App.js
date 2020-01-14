@@ -6,6 +6,7 @@ import Dashboard from './js/screens/Dashboard'
 import ARScreen from './js/screens/ARScreen'
 import MainScene from './js/ARPortals/MainScene'
 import Profile from './js/screens/Profile'
+import Gallery from './js/screens/Gallery'
 import { styles } from './js/components/Styles'
 import Footer from './js/components/Footer'
 import {
@@ -22,13 +23,19 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-var InitialARScene = require('./js/ARPortals/MainScene.js');
-// var AR_NAVIGATOR_TYPE = "AR";
+const InitialARScene = require('./js/ARPortals/MainScene.js');
+const baseURL = 'https://ar-travel-app.herokuapp.com/'
 
 export default class ViroSample extends Component {
   state = {
-    // navigatorType : AR_NAVIGATOR_TYPE,
-    screen: ''
+    screen: '',
+    images: []
+  }
+
+  componentDidMount(){
+    fetch(`${baseURL}images`)
+        .then(response => response.json())
+        .then(images => this.setState({ images }))
   }
 
   getLoginFormScreen = () => {
@@ -53,25 +60,27 @@ export default class ViroSample extends Component {
         <ViroARSceneNavigator 
           style={styles.ARScene}
           initialScene={{scene: InitialARScene}}
-          // changeScreen={this.changeScreen}
        />
         <Footer
           changeScreen={this.changeScreen}
         />
-        {/* <TouchableOpacity 
-          style={styles.buttons}
-          onPress={() => this.changeScreen('dashboard')}
-          >
-          <Text style={styles.buttonText}>SIGN UP</Text>
-        </TouchableOpacity> */}
       </View>
     )
   }
     
   getProfileScreen = () => {
     return (
-      <ProfileScreen
+      <Profile
        changeScreen={this.changeScreen}
+      />
+    )
+  }
+
+  getGalleryScreen = () => {
+    return (
+      <Gallery
+       changeScreen={this.changeScreen}
+       images={this.state.images}
       />
     )
   }
@@ -88,8 +97,10 @@ export default class ViroSample extends Component {
         return this.getDashboardScreen()
       case 'AR':
         return this.getARScreen()
-      case 'Profile':
+      case 'profile':
         return this.getProfileScreen()
+      case 'gallery':
+        return this.getGalleryScreen()
       default:
         return this.getLoginFormScreen()
     }
@@ -103,6 +114,5 @@ export default class ViroSample extends Component {
     )
   }
 }
-
 
 module.exports = ViroSample
