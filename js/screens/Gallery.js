@@ -5,17 +5,20 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Button,
+  ScrollView
 } from 'react-native'
+import { styles } from '../components/Styles'
 import ImageContainer from '../components/ImageContainer'
-import Footer from '../components/Footer'
+import CameraRoll from "@react-native-community/cameraroll";
 
-// const baseURL = 'https://ar-travel-app.herokuapp.com/'
 const options = {
     title: 'Select a Photo',
     chooseFromLibraryButtonTitle: 'Choose Photo from Gallery',
     quality: 1
 }
+// const CameraRoll = require('@react-native-community/cameraroll')
 
 export default class Gallery extends Component {
 
@@ -23,31 +26,38 @@ export default class Gallery extends Component {
         imageSource: null,
         num: 0,
         selected: [],
+        photos: []
         // images: []
     }
 
-    // componentDidMount(){
-    //     fetch(`${baseURL}images`)
-    //         .then(response => response.json())
-    //         .then(images => this.setState({ images }))
-    // }
+    _handleButtonPress = () => {
+        return CameraRoll.getPhotos({}) ? console.warn('asdga') : console.warn('damon')
+
+        // CameraRoll.getPhotos({
+        //     first: 20,
+        //     groupTypes: 'All',
+        //     assetType: 'All',
+        //   })
+        //   .then(r => {
+        //     this.setState({ photos: r.edges });
+        //   })
+        //   .catch((err) => {
+        //      //Error Loading Images
+        //   });
+    };
 
     showImages = () => {
         return (
-            <View>
-                <ImageContainer
-                    images={this.props.images} 
-                />
-                <Footer
-                    changeScreen={this.props.changeScreen}
-                />
-            </View>
+            <ImageContainer
+                images={this.props.images}
+                handleChange={this.props.handleChange}
+            />
         )
     }
 
     selectPhoto = () => {
-        console.warn(ImagePicker)
-        // ImagePicker.showImagePicker(options, (response) => {
+        console.warn(CameraRoll)
+        // CameraRoll.showImagePicker(options, (response) => {
         //     console.log('Response = ', response);
         
         //     if (response.didCancel) {
@@ -64,35 +74,16 @@ export default class Gallery extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                {this.showImages()}
-                {/* <Image 
-                    source={this.state.imageSource} 
-                    style={{width:'100%', height:300, margin:10}}
-                /> */}
-                {/* <TouchableOpacity
-                    style={{backgroundColor: 'green', margin:10, padding:10}}
-                    onPress={this.selectPhoto}
-                >
-                    <Text style={{color: '#fff'}}>
-                        Select Image
-                    </Text>
-                </TouchableOpacity>        */}
+            <View>
+                {/* <View style={styles.container}> */}
+                <TouchableOpacity
+                    style={styles.buttons}
+                    onPress={this._handleButtonPress}>
+                </TouchableOpacity>
+                    <Button title="Load Images" onPress={this._handleButtonPress} />
+                {/* </View> */}
+                {/* {this.showImages()} */}
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  gallery: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
-});

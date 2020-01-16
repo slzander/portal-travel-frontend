@@ -15,6 +15,8 @@ PODS:
     - React/Core
   - react-native-image-picker (2.0.0):
     - React
+  - react-native-image-picker-ios (1.0.1):
+    - React
   - react-native-safe-area-context (0.6.2):
     - React
   - React/Core (0.59.9):
@@ -45,11 +47,11 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNCMaskedView (0.1.5):
+  - RNCMaskedView (0.1.6):
     - React
   - RNGestureHandler (1.5.3):
     - React
-  - RNReanimated (1.4.0):
+  - RNReanimated (1.5.0):
     - React
   - RNScreens (2.0.0-alpha.12):
     - React
@@ -63,6 +65,7 @@ DEPENDENCIES:
   - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
   - react-native-fetch-blob (from `../node_modules/react-native-fetch-blob`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - "react-native-image-picker-ios (from `../node_modules/@react-native-community/image-picker-ios`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React/Core (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
@@ -99,6 +102,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fetch-blob"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-image-picker-ios:
+    :path: "../node_modules/@react-native-community/image-picker-ios"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   RNCMaskedView:
@@ -122,18 +127,19 @@ SPEC CHECKSUMS:
   GVRAudioSDK: 302f0a8f190d855868ea07f246ce4f9b44c392ae
   GVRSDK: 0cb9d0ce06a84d698e61e3db9509766022dcf815
   React: a86b92f00edbe1873a63e4a212c29b7a7ad5224f
-  react-native-cameraroll: 463aff54e37cff27ea76eb792e6f1fa43b876320
+  react-native-cameraroll: ad20f5a93c25cb83a76455df57a2c62fbb63aaed
   react-native-fetch-blob: 2bef9be702de8726f4d7bf58d2345579aaaee60d
-  react-native-image-picker: a878ed6ac8c54ec4f5d7ab7a019c7b5eb7a737d4
-  react-native-safe-area-context: 25260c5d0b9c53fd7aa88e569e2edae72af1f6a3
-  RNCMaskedView: dd13f9f7b146a9ad82f9b7eb6c9b5548fcf6e990
+  react-native-image-picker: ba7fe85b3373ff33d4827210d989dfcbbd68f7f9
+  react-native-image-picker-ios: 6794e4a6495da816cbe12a346a347988602900d0
+  react-native-safe-area-context: a1d322930b8c5d04ebeb77cc47cc97575ad27203
+  RNCMaskedView: e5b99bc191945f157adeede68da9d424462de177
   RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
-  RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
+  RNReanimated: 1761c14b3982fc77fc9fdad6ea2f42ed861c342a
   RNScreens: 254da4b84f25971cbb30ed3ddc84131f23cac812
   ViroKit: b3c0e0d4a40c2e78d31bb09740a49cd8bf6bd68f
   ViroReact: 7ec32276dcd1883662b4587eaedfff67f7fc3625
   yoga: 03ff42a6f223fb88deeaed60249020d80c3091ee
 
-PODFILE CHECKSUM: 68769deed4b594f8b1610752f135d20c8f8a463e
+PODFILE CHECKSUM: 1f3554968582d4086ad7fbdee6d1b9d6f1c96ad3
 
 COCOAPODS: 1.8.4

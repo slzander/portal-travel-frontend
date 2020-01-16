@@ -12,16 +12,17 @@ import {
     Alert
 } from 'react-native'
 
-export default function ImageCard ({ image }) {
-    console.warn(image)
+export default function ImageCard ({ image, handleChange }) {
     return(
         <View style={styles.imageCard}>
-            <Image 
-                style={styles.image}
-                resizeMode={'contain'}
-                source={{uri: image.url}}
-            />
-        <Text>{image.title}</Text>
+            <TouchableOpacity onPress={() => handleChange(image)}>
+                <Image 
+                    style={styles.image}
+                    resizeMode={'contain'}
+                    source={{uri: image.url}}
+                />
+            </TouchableOpacity>
+            <Text style={styles.imageText}>{image.title}</Text>
         </View>
     )
 }

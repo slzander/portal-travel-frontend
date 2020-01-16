@@ -1,6 +1,6 @@
 platform :ios, '9.3'
 target 'ViroSample' do
-  use_frameworks!
+  # use_frameworks!
   pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
   pod 'ViroKit', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/'
   pod 'RNCMaskedView', :path => '../node_modules/@react-native-community/masked-view'
@@ -41,5 +41,7 @@ target 'ViroSample' do
 
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'react-native-image-picker-ios', :path => '../node_modules/@react-native-community/image-picker-ios'
 
 end

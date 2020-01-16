@@ -31,6 +31,7 @@
 #import "REAValueNode.h"
 #import "REAModule.h"
 #import "REANodesManager.h"
+#import "REAUtils.h"
 #import "RCTConvert+REATransition.h"
 #import "REAAllTransitions.h"
 #import "REATransition.h"

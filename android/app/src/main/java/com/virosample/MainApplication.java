@@ -3,6 +3,7 @@ package com.virosample;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
 import com.imagepicker.ImagePickerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnativecommunity.cameraroll.CameraRollPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ModuleRegistryAdapter(),
             new ImagePickerPackage(),
             new RNFetchBlobPackage(),
             new CameraRollPackage(),

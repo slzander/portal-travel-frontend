@@ -9,7 +9,8 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<!-- <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string> -->
+	<string>com.flatiron.travelwithme</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -56,13 +57,13 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(app) would like to access your photo gallery</string>
+	<string>This app would like to access your photo gallery</string>
 	<key>NSCameraUsageDescription</key>
-    <string>$(app) would like to use your camera</string>
+    <string>This app would like to use your camera</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>$(app) would like to save photos to your photo gallery</string>
+    <string>This app would like to save photos to your photo gallery</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>$(app) would like to use your microphone (for videos)</string>
+    <string>This app would like to use your microphone (for videos)</string>
 </dict>
 
 

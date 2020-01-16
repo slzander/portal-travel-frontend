@@ -40,6 +40,8 @@ export default class Profile extends React.Component {
         return (
             <ImageContainer
                 images={this.props.userImages}
+                handleChange={this.props.handleChange}
+                changeScreen={this.props.changeScreen}
             />
         )
     }
@@ -56,7 +58,7 @@ export default class Profile extends React.Component {
                 {this.showUserImages()}
                 <Button 
                     title='Choose Photo'
-                    onPress={() => this.props.changeScreen('gallery')}
+                    onPress={() => this.props.changeScreen('AR')}
                 />
             </View>
         )

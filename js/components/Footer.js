@@ -13,7 +13,7 @@ import {
 
 export default function Footer ({ changeScreen }) {
     return(
-        <View>
+        <View style={styles.navBar}>
             <TouchableOpacity 
                 style={styles.buttons}
                 onPress={() => changeScreen('dashboard')}
