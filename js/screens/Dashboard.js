@@ -6,13 +6,13 @@ import {
 } from 'react-native'
 import { styles } from '../components/Styles'
 
-export default function Dashboard({ changeScreen, users, userName, uid }){
-    console.warn(uid)
+export default function Dashboard({ changeScreen, users, userName, user }){
+    // console.warn(uid)
 
     return(
         <View style={styles.dashboardContainer}>
             <View style={styles.dashboardInfo}>
-                <Text style={styles.header}>Welcome {userName}!</Text>
+                <Text style={styles.header}>Welcome {user.first_name}!</Text>
             </View>
             <View style={styles.listContainer}>
                 <Text style={styles.listItems}>1. Click on "My Profile"</Text>

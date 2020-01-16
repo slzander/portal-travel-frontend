@@ -10,57 +10,63 @@ import {
     StatusBar,
     Button
 } from 'react-native'
-import Gallery from './Gallery'
 import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles'
 
-
-export default class Profile extends React.Component {
+export default function Profile ({ handleChange, changeScreen, userImages }) {
     state = {
         photo: null,
         images: []
     }
-    
-    choosePhoto = () => {
-        // const options = {
-        //     noData: true
-        // }
-        // const ImagePicker = require('react-native-image-picker');
 
-        // ImagePicker.launchImageLibrary(options, response => {
-        //     console.warn(response)
-        //     if(response.uri){
-        //         this.setState({ photo: response })
-        //     }
-        // })
+    choosePhoto = () => {
+
     }
 
     showUserImages = () => {
-        // console.warn(this.props.userImages)
+        // console.warn(userImages)
         return (
             <ImageContainer
-                images={this.props.userImages}
-                handleChange={this.props.handleChange}
-                changeScreen={this.props.changeScreen}
+                images={userImages}
+                handleChange={handleChange}
+                changeScreen={changeScreen}
             />
         )
     }
 
-    render(){
         return(
             <View style={styles.profileContainer}>
-                {/* {this.state.photo && (
-                    <Image 
-                        source={{ uri: this.state.photo.uri}}
-                        style={styles.chosenPhoto}
-                    />
-                )}  */}
-                {this.showUserImages()}
-                <Button 
-                    title='Choose Photo'
-                    onPress={() => this.props.changeScreen('AR')}
-                />
+                <View style={styles.profileHeader}>
+                    <Text style={styles.headerText}>Welcome!</Text>
+                    <TouchableOpacity 
+                        style={styles.gearContainer}
+                        onPress={() => changeScreen('account')}
+                    >
+                        <Image 
+                            style={styles.gear}
+                            source={require('../images/gear.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity
+                    style={styles.buttons}
+                    onPress={() => changeScreen('dashboard')}
+                >
+                    <Text style={styles.buttonText}>Back to Dashboard</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.buttons}
+                    onPress={() => changeScreen('AR')}
+                >
+                    <Text style={styles.buttonText}>Take me to my Portals</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.buttons}
+                    onPress={() => changeScreen('account')}
+                >
+                    <Text style={styles.buttonText}>Account Settings</Text>
+                </TouchableOpacity>
+                {showUserImages()}
             </View>
         )
-    }
 }

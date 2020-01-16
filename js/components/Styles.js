@@ -24,9 +24,18 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center'
     },
+    gearContainer: {
+        // alignItems: 'center',
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
     logo: {
         width: 100,
         height: 100
+    },
+    gear: {
+        width: 50,
+        height: 50
     },
     title: {
         color: '#FFF',
@@ -63,6 +72,17 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         textAlignVertical: 'center',
         textAlign: 'center'
+    },
+    profileHeader: {
+        paddingTop: 120,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#3498db',
+    },
+    profileHeaderText: {
+        flex: 1,
     },
     profileContainer: {
         paddingTop: 20,
@@ -106,7 +126,7 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     header: {
-        fontSize: 40
+        fontSize: 40,
     },
     listContainer: {
         margin: 2

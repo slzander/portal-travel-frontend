@@ -6,6 +6,7 @@ import Dashboard from './js/screens/Dashboard'
 import ARScreen from './js/screens/ARScreen'
 import MainScene from './js/ARPortals/MainScene'
 import Profile from './js/screens/Profile'
+import Account from './js/screens/Account'
 import Gallery from './js/screens/Gallery'
 import { styles } from './js/components/Styles'
 import Footer from './js/components/Footer'
@@ -47,7 +48,7 @@ export default class ViroSample extends Component {
     screen: '',
     images: [],
     userImages: [],
-    users: {},
+    users: [],
     firstName: '',
     email: '',
     password: '',
@@ -59,24 +60,40 @@ export default class ViroSample extends Component {
     fetch(`${baseURL}images`)
       .then(response => response.json())
       .then(images => this.setState({ images }))
-      // .then(this.resolvePromises())
       // .then(this.checkLoginStatus())
     
-    // fetch(`${baseURL}user`)
-    //   .then(response => response.json())
-    //   .then(users => 
-    //     this.setState({ users, userImages : users[0].images })
-    //     )
+    fetch(`${baseURL}user`)
+      .then(response => response.json())
+      .then(users => 
+        this.setState({ users,
+           userImages : users[0].images })
+        )
+        // change this way of getting user images!!!!!
   }
 
-  // checkLoginStatus = () => {
-  //   console.log('yo')
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if(user){
-  //       this.getProfileScreen()
-  //     }
-  //   })
-  // }
+  submitPasswordChange = (password) => {
+    fetch(`${baseURL}user`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        password_digest: this.state.password
+      })
+    }).then(response => response.json())
+    .then(user => console.warn(user))
+    // .then(user => this.setState({ user }))
+
+  }
+
+  checkLoginStatus = () => {
+    console.log('yo')
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        return this.getProfileScreen()
+      }
+    })
+  }
 
   submitSignUp(email, password){
     try{
@@ -93,15 +110,25 @@ export default class ViroSample extends Component {
   submitLogin(email, password){
     try{
       firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => this.setState({ uid: user.user.uid }))
-      // .then(user => console.warn(user.user.uid))
-      .then(console.warn(this.state.uid))
-        // .then(this.getProfileScreen())
+      // .then(user => this.setState({ email: user.user.email }))
+      .then(this.updateCurrentUser)
+      .then(() => this.changeScreen('dashboard'))
     }
     catch(error){
       console.warn(error.toString())
     }
-    this.getProfileScreen()
+  }
+
+  updateCurrentUser = () => {
+    let currentUser = this.state.users.find(user => {
+      return user.username === this.state.email})
+      this.setState({ user: currentUser })
+  }
+    
+  deleteAccount = () => {
+    fetch(`${baseURL}user/${this.state.user.id}`, {
+      method: 'DELETE'
+    }).then(this.changeScreen(''))
   }
 
   setUser = (user) => {
@@ -133,13 +160,12 @@ export default class ViroSample extends Component {
   getDashboardScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-        {this.state.images.length > 0 ?
           <Dashboard
           userName={this.state.email}
           changeScreen={this.changeScreen}
           users={this.state.users}
-          uid={this.state.uid}
-          /> : console.warn('error')}
+          user={this.state.user}
+          />
       </View>
     )
   }
@@ -162,12 +188,25 @@ export default class ViroSample extends Component {
   getProfileScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-        {this.state.user ?
           <Profile
-          handleChange={this.updateUserImage}
           changeScreen={this.changeScreen}
           userImages={this.state.userImages}
-          /> : console.warn('error')}
+          />
+        <Footer
+          changeScreen={this.changeScreen}
+        />
+      </View>
+    )
+  }
+    
+  getAccountScreen = () => {
+    return (
+      <View style={styles.containerWithFooter}>
+          <Account
+          changeScreen={this.changeScreen}
+          passwordChange={this.passwordChange}
+          deleteAccount={this.deleteAccount}
+          />
         <Footer
           changeScreen={this.changeScreen}
         />
@@ -197,10 +236,10 @@ export default class ViroSample extends Component {
 
   changeScreen = (screen) => {
     this.setState({ screen })
+    return this.getScreen()
   }
 
   getScreen = () => {
-    // console.warn(this.state.screen)
     switch (this.state.screen){
       case 'loginForm':
         return this.getLoginFormScreen()
@@ -212,6 +251,8 @@ export default class ViroSample extends Component {
         return this.getProfileScreen()
       case 'gallery':
         return this.getGalleryScreen()
+      case 'account':
+        return this.getAccountScreen()
       default:
         // return this.getLoginFormScreen()
         return(
@@ -249,7 +290,6 @@ export default class ViroSample extends Component {
                             // placeholderTextColor='rgba(255,255,255,0.7)'
                             returnKeyType='next'
                             // onSubmitEditing={() => this.passwordInput.focus()}
-                            // onChangeText={username => this.setState({ username })}
                             onChangeText={email => this.setState ({ email })}
                             keyboardType='email-address'
                             autoCapitalize='none'
@@ -258,8 +298,6 @@ export default class ViroSample extends Component {
                         <TextInput 
                             style={styles.input} 
                             placeholder='Password'
-                            // placeholderTextColor='rgba(255,255,255,0.7)' 
-                            // onChangeText={password => this.setState({ password })}
                             onChangeText={password => this.setState ({ password })}
                             secureTextEntry
                             returnKeyType='go'
@@ -269,7 +307,6 @@ export default class ViroSample extends Component {
                             <TouchableOpacity 
                                 style={styles.buttons}
                                 onPress={() => this.submitSignUp(this.state.email, this.state.password)}
-                                // onPress={() => this.changeScreen('dashboard')}
                             >
                                 <Text style={styles.buttonText}>Sign Up</Text>
                             </TouchableOpacity>
@@ -288,9 +325,9 @@ export default class ViroSample extends Component {
     }
   }
 
-  updateUserImage = (image) => {
-    fetch(`${baseURL}user-images/${image.id}`)
-  }
+  // updateUserImage = (image) => {
+  //   fetch(`${baseURL}user-images/${image.id}`)
+  // }
 
   render() {
     return (

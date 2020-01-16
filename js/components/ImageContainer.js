@@ -22,7 +22,6 @@ export default function ImageContainer ({ images, handleChange }) {
             handleChange={handleChange}
         />
     })
-    console.warn(handleChange)
 
     return(
         <ScrollView>
