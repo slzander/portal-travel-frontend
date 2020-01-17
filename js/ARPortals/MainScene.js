@@ -13,14 +13,13 @@ import {
   ViroImage
 } from 'react-viro';
 
-export default class MainScene extends React.Component {
-  state = {
-    // userImages: [],
-  }
+export default function MainScene ({ arSceneNavigator }) {
 
-  render(){
+  
     // console.warn(this.props.arSceneNavigator.viroAppProps[0].title)
     return(
+
+
       <>
         <ViroARScene>
           <ViroAmbientLight color="#ffffff" intensity={200}/>
@@ -37,10 +36,10 @@ export default class MainScene extends React.Component {
               type="VRX"
             />
             </ViroPortal>
-            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[0].url }} />
+            <Viro360Image source={{ uri: arSceneNavigator.viroAppProps[0].url }} />
           </ViroPortalScene>
           <ViroText 
-            text={this.props.arSceneNavigator.viroAppProps[0].title} 
+            text={arSceneNavigator.viroAppProps[0].title} 
             scale={[.5, .5, .5]} 
             position={[1, -1, -1]} 
             style={styles.ARTextStyle} 
@@ -59,7 +58,7 @@ export default class MainScene extends React.Component {
             <Viro360Image source={require("./portal_res/360_island.jpg")} />
           </ViroPortalScene>
           <ViroText 
-            text={'A Beach Somehwere'} 
+            text={'A Beach Somewhere'} 
             // text={this.props.arSceneNavigator.viroAppProps[1].title} 
             scale={[.5, .5, .5]} 
             position={[0, -1, -2]} 
@@ -89,7 +88,6 @@ export default class MainScene extends React.Component {
         </ViroARScene>
       </>
     )
-  }
 }
 
 module.exports = MainScene;

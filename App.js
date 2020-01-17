@@ -95,24 +95,26 @@ export default class ViroSample extends Component {
     })
   }
 
-  submitSignUp(email, password){
+  submitSignUp = (email, password) =>{
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(this.makeNewUser)
+
+        .then(console.warn(this.state.user))
+        // .then(this.assignDefaultImages)
+        .then(() => this.changeScreen('dashboard'))
     }
     catch(error){
-      // Alert.alert('Incorrect Username and/or Password', [{
-      //   text: 'Okay'
-      // }])
-      console.warn(error)
+      console.warn(error.toString())
     }
   }
 
-  submitLogin(email, password){
+  submitLogin = (email, password) => {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password)
-      // .then(user => this.setState({ email: user.user.email }))
-      .then(this.updateCurrentUser)
-      .then(() => this.changeScreen('dashboard'))
+        .then(this.updateCurrentUser)
+        .then(console.warn(this.state.user))
+        .then(() => this.changeScreen('dashboard'))
     }
     catch(error){
       console.warn(error.toString())
@@ -123,15 +125,10 @@ export default class ViroSample extends Component {
     let currentUser = this.state.users.find(user => {
       return user.username === this.state.email})
       this.setState({ user: currentUser })
-  }
-    
-  deleteAccount = () => {
-    fetch(`${baseURL}user/${this.state.user.id}`, {
-      method: 'DELETE'
-    }).then(this.changeScreen(''))
+      return this.changeScreen('dashboard')
   }
 
-  setUser = (user) => {
+  makeNewUser = () => {
     fetch(`${baseURL}user`, {
       method: 'POST',
       headers: {
@@ -146,38 +143,78 @@ export default class ViroSample extends Component {
       .then(user => this.setState({ user }))
   }
 
-  getLoginFormScreen = () => {
-    return (
-      <LoginForm
-        changeScreen={this.changeScreen}
-        submitSignUp={this.submitSignUp}
-        userNameChange={this.userNameChange}
-        passwordChange={this.passwordChange}
-      />
-    )
+  assignDefaultImages = () => {
+    let i = 0
+    while(i < 3){
+      fetch(`${baseURL}user-images`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: this.state.user.id,
+          image_id: this.state.images[0].id
+        })
+      })
+      i++
+    }
   }
+    
+  deleteAccount = () => {
+    let user = firebase.auth().currentUser
+    user.delete()
+      .then(
+        fetch(`${baseURL}user/${this.state.user.id}`, {
+          method: 'DELETE'
+        }).then(this.setState({ user: {} }))
+        // .then(this.changeScreen(''))
+      )
+      .catch(error => console.warn(error))
+  }
+
+  // getLoginFormScreen = () => {
+  //   return (
+  //     <LoginForm
+  //       submitSignUp={this.submitSignUp}
+  //       submitLogin={this.submitLogin}
+  //       setFirstName={this.setFirstName}
+  //       setEmail={this.setEmail}
+  //       setPassword={this.setPassword}
+  //       email={this.state.email}
+  //       password={this.state.password}
+  //     />
+  //   )
+  // }
 
   getDashboardScreen = () => {
     return (
-      <View style={styles.containerWithFooter}>
-          <Dashboard
-          userName={this.state.email}
+      <>
+        {/* {this.state.user !== {} ? 
+          <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> : */}
+          <View style={styles.containerWithFooter}>
+            <Dashboard
+            userName={this.state.email}
+            changeScreen={this.changeScreen}
+            users={this.state.users}
+            user={this.state.user}
+            />
+        </View>
+        <Footer
           changeScreen={this.changeScreen}
-          users={this.state.users}
-          user={this.state.user}
-          />
-      </View>
+        />
+        {/* } */}
+      </>
     )
   }
     
   getARScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-        {this.state.images.length > 0 ? <ViroARSceneNavigator 
+        <ViroARSceneNavigator 
           style={styles.ARScene}
           initialScene={{scene: InitialARScene}}
           viroAppProps={this.state.userImages}
-       /> : console.warn('error')}
+        />
         <Footer
           changeScreen={this.changeScreen}
         />
@@ -192,9 +229,9 @@ export default class ViroSample extends Component {
           changeScreen={this.changeScreen}
           userImages={this.state.userImages}
           />
-        <Footer
+        {/* <Footer
           changeScreen={this.changeScreen}
-        />
+        /> */}
       </View>
     )
   }
@@ -259,80 +296,77 @@ export default class ViroSample extends Component {
           <View style={styles.container}>
             {this.state.images.length === 0 ? 
               <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
-                <>
+              <>
                 <StatusBar barStyle = 'light-content'/>
                 <View style={styles.logoContainer}>
-                    <Image 
-                        style={styles.logo}
-                        source={require('./js/images/mountain.png')}
-                    />
-                    <Text style={styles.title}>Travel With Me</Text>
+                  <Image 
+                    style={styles.logo}
+                    source={require('./js/images/doorway1.png')}
+                  />
+                  <Text style={styles.title}>Travel Portals</Text>
                 </View>
                 <KeyboardAvoidingView 
-                    behavior='padding'
-                    style={styles.formContainer}
+                  behavior='padding'
+                  style={styles.formContainer}
                 >
-                    <View style={styles.loginContainer}>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder='First Name'
-                            // placeholderTextColor='rgba(255,255,255,0.7)'
-                            returnKeyType='next'
-                            // onSubmitEditing={() => this.passwordInput.focus()}
-                            // onChangeText={username => this.setState({ username })}
-                            onChangeText={firstName => this.setState ({ firstName })}
-                            // autoCapitalize='none'
-                            autoCorrect={false} 
-                            />
-                        <TextInput 
-                            style={styles.input}
-                            placeholder='Email'
-                            // placeholderTextColor='rgba(255,255,255,0.7)'
-                            returnKeyType='next'
-                            // onSubmitEditing={() => this.passwordInput.focus()}
-                            onChangeText={email => this.setState ({ email })}
-                            keyboardType='email-address'
-                            autoCapitalize='none'
-                            autoCorrect={false} 
-                            />
-                        <TextInput 
-                            style={styles.input} 
-                            placeholder='Password'
-                            onChangeText={password => this.setState ({ password })}
-                            secureTextEntry
-                            returnKeyType='go'
-                            ref={(input) => this.passwordInput = input} 
-                        />
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity 
-                                style={styles.buttons}
-                                onPress={() => this.submitSignUp(this.state.email, this.state.password)}
-                            >
-                                <Text style={styles.buttonText}>Sign Up</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                style={styles.buttons}
-                                onPress={() => this.submitLogin(this.state.email, this.state.password)}
-                            >
-                                <Text style={styles.buttonText}>Login</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </KeyboardAvoidingView>
-                </>}
-            </View>
+                <View style={styles.loginContainer}>
+                  <TextInput 
+                    style={styles.input}
+                    placeholder='First Name'
+                    // placeholderTextColor='rgba(255,255,255,0.7)'
+                    returnKeyType='next'
+                    // onSubmitEditing={() => this.passwordInput.focus()}
+                    // onChangeText={username => this.setState({ username })}
+                    onChangeText={firstName => this.setState ({ firstName })}
+                    // autoCapitalize='none'
+                    autoCorrect={false} 
+                  />
+                  <TextInput 
+                    style={styles.input}
+                    placeholder='Email'
+                    // placeholderTextColor='rgba(255,255,255,0.7)'
+                    returnKeyType='next'
+                    // onSubmitEditing={() => this.passwordInput.focus()}
+                    onChangeText={email => this.setState ({ email })}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    autoCorrect={false} 
+                  />
+                  <TextInput 
+                    style={styles.input} 
+                    placeholder='Password'
+                    onChangeText={password => this.setState ({ password })}
+                    secureTextEntry
+                    returnKeyType='go'
+                    ref={(input) => this.passwordInput = input} 
+                  />
+                  <View style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                      style={styles.buttons}
+                      onPress={() => this.submitSignUp(this.state.email, this.state.password)}
+                    >
+                      <Text style={styles.buttonText}>Sign Up</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={styles.buttons}
+                      onPress={() => this.submitLogin(this.state.email, this.state.password)}
+                      onPress={() => this.changeScreen('dashboard')}
+                    >
+                      <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </KeyboardAvoidingView>
+            </>}
+          </View>
         )
     }
   }
 
-  // updateUserImage = (image) => {
-  //   fetch(`${baseURL}user-images/${image.id}`)
-  // }
-
   render() {
     return (
       <>
-        {this.getScreen()}
+        {this.state.user === {} ? this.changeScreen('') : this.getScreen()}
       </>
     )
   }

@@ -14,12 +14,12 @@ import {
 export default function Footer ({ changeScreen }) {
     return(
         <View style={styles.navBar}>
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
                 style={styles.buttons}
                 onPress={() => changeScreen('dashboard')}
                 >
                 <Text style={styles.buttonText}>Dashboard</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity 
                 style={styles.buttons}
                 onPress={() => changeScreen('profile')}

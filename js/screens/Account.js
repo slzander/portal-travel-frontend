@@ -15,7 +15,7 @@ export default class Account extends React.Component {
     
     render(){
         return(
-            <View style={styles.container}>
+            <View style={styles.accountContainer}>
                 {/* <StatusBar 
                     barStyle = 'light-content'
                 /> */}
@@ -43,12 +43,12 @@ export default class Account extends React.Component {
                             >
                                 <Text style={styles.buttonText}>Save Changes</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity 
+                            {/* <TouchableOpacity 
                                 style={styles.buttons}
                                 onPress={() => this.props.changeScreen('dashboard')}
                             >
                                 <Text style={styles.buttonText}>Go back</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             <TouchableOpacity 
                                 style={styles.buttons}
                                 onPress={() => this.props.deleteAccount()}

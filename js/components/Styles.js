@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#3498db',
+        backgroundColor: '#429BB2',
     },
     logoContainer: {
         alignItems: 'center',
@@ -30,19 +30,33 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     logo: {
-        width: 100,
-        height: 100
+        width: 150,
+        height: 150
+    },
+    gearContainer: {
+        flex: 1,
+        alignItems: 'flex-end',
+        backgroundColor: '#429BB2',
+
     },
     gear: {
-        width: 50,
-        height: 50
+        width: 30,
+        height: 30,
+        marginRight: 25,
+        // marginTop: 15,
+        margin: 45
     },
+    // gearButton: {
+    //     alignItems: 'flex-end'
+    // },
     title: {
-        color: '#FFF',
+        color: 'black',
         marginTop: 10,
         width: 160,
         textAlign: 'center',
-        opacity: 0.6
+        opacity: 0.6,
+        fontWeight: 'bold',
+        fontSize: 24
     },
     formContainer: {
         padding: 20
@@ -52,19 +66,23 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        // color: '#FFF',
+        backgroundColor: '#DCDCDD',
         marginBottom: 20,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderRadius: 5,
     },
     buttons: {
         margin: 10,
-        backgroundColor: '#2980b9',
-        paddingVertical: 10,
+        marginLeft: 50,
+        marginRight: 50,
+        borderRadius: 5,
+        backgroundColor: '#177993',
+        paddingVertical: 15,
     },
     buttonText: {
         textAlign: 'center',
-        color: '#FFF'
+        color: '#FFF',
+        fontSize: 17,
     },
     ARTextStyle: {
         fontFamily: 'Arial',
@@ -79,17 +97,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#3498db',
+        backgroundColor: '#429BB2',
     },
     profileHeaderText: {
         flex: 1,
     },
     profileContainer: {
-        paddingTop: 20,
-        flex: 1,
+        // paddingTop: 50,
+        flex: 7,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#3498db',
+        backgroundColor: '#429BB2',
     },
     chosenPhoto: {
         width: 300,
@@ -99,7 +117,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         marginBottom: 5,
-        backgroundColor: '#2980b9',
+        backgroundColor: '#177993',
     },
 
     image: {
@@ -113,27 +131,50 @@ const styles = StyleSheet.create({
     },
     dashboardContainer: {
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        backgroundColor: '#3498db',
+        // flexDirection: 'column',
+        // justifyContent: 'space-between',
+        backgroundColor: '#429BB2',
+    },
+    dashboardImage: {
+        flex: 1,
+        position: 'absolute',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        marginTop: 170,
+        // paddingTop: 100,
+        marginLeft: 10,
+        width: '95%',
+        height: '95%',
+    },
+    gif: {
+        width: 310,
+        height: 510,
+        // paddingTop: 60,
+        marginTop: 120,
+        marginLeft: 33,
     },
     dashboardInfo: {
-        // flex: 1,
-        marginTop: 130,
+        flex: 1,
+        marginTop: 100,
     },
     navBar: {
-        backgroundColor: '#3498db',
+        backgroundColor: '#429BB2',
         paddingBottom: 20,
     },
     header: {
-        fontSize: 40,
+        fontSize: 22,
     },
     listContainer: {
         margin: 2
     },
     listItems: {
         fontSize: 25
-    }
+    },
+    accountContainer: {
+        flex: 1,
+        backgroundColor: '#429BB2',
+        marginTop: 100,
+    },
 })
 
 export { styles }
