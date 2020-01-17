@@ -3,26 +3,19 @@ import Login from './js/screens/Login'
 import LoginForm from './js/screens/LoginForm'
 import SignUp from './js/screens/SignUp'
 import Dashboard from './js/screens/Dashboard'
-import ARScreen from './js/screens/ARScreen'
-import MainScene from './js/ARPortals/MainScene'
 import Profile from './js/screens/Profile'
 import Account from './js/screens/Account'
 import Gallery from './js/screens/Gallery'
 import { styles } from './js/components/Styles'
 import Footer from './js/components/Footer'
 import {
-  AppRegistry,
   Text,
   View,
-  StyleSheet,
-  PixelRatio,
-  TouchableHighlight,
   TextInput, 
   Image,
   KeyboardAvoidingView,
   TouchableOpacity,
   StatusBar,
-  Alert,
   ActivityIndicator
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
@@ -53,7 +46,7 @@ export default class ViroSample extends Component {
     email: '',
     password: '',
     user: {},
-    uid: ''
+    currentImage: {}
   }
 
   componentDidMount(){
@@ -86,20 +79,19 @@ export default class ViroSample extends Component {
 
   }
 
-  checkLoginStatus = () => {
-    console.log('yo')
-    firebase.auth().onAuthStateChanged(user => {
-      if(user){
-        return this.getProfileScreen()
-      }
-    })
-  }
+  // checkLoginStatus = () => {
+  //   console.log('yo')
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if(user){
+  //       return this.getProfileScreen()
+  //     }
+  //   })
+  // }
 
   submitSignUp = (email, password) =>{
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(this.makeNewUser)
-
         .then(console.warn(this.state.user))
         // .then(this.assignDefaultImages)
         .then(() => this.changeScreen('dashboard'))
@@ -153,7 +145,7 @@ export default class ViroSample extends Component {
         },
         body: JSON.stringify({
           user_id: this.state.user.id,
-          image_id: this.state.images[0].id
+          image_id: this.state.images[i].id
         })
       })
       i++
@@ -228,10 +220,8 @@ export default class ViroSample extends Component {
           <Profile
           changeScreen={this.changeScreen}
           userImages={this.state.userImages}
+          handleChange={this.setCurrentImage}
           />
-        {/* <Footer
-          changeScreen={this.changeScreen}
-        /> */}
       </View>
     )
   }
@@ -251,23 +241,39 @@ export default class ViroSample extends Component {
     )
   }
 
+  setCurrentImage = (currentImage) => {
+    this.setState({ currentImage })
+    this.changeScreen('gallery')
+  }
+
+  changeUserImage = (newImage) => {
+  
+    fetch(`${baseURL}user-images/${this.state.currentImage.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.user.id,
+        image_id: newImage.id
+      })
+    }).then(userImage => console.warn(userImage))
+    .then(() => this.changeScreen('profile'))
+  }
+
   getGalleryScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
       {this.state.images.length > 0 ?
         <Gallery
-        handleChange={this.getProfileScreen}
-        // changeScreen={this.changeScreen}
+        handleChange={this.changeUserImage}
         images={this.state.images}
+        currentImage={this.state.currentImage}
         /> : console.warn('error')}
       <Footer
         changeScreen={this.changeScreen}
       />
     </View>
-      // <Gallery
-      //  changeScreen={this.changeScreen}
-      //  images={this.state.images}
-      // />
     )
   }
 
@@ -313,18 +319,13 @@ export default class ViroSample extends Component {
                   <TextInput 
                     style={styles.input}
                     placeholder='First Name'
-                    // placeholderTextColor='rgba(255,255,255,0.7)'
                     returnKeyType='next'
-                    // onSubmitEditing={() => this.passwordInput.focus()}
-                    // onChangeText={username => this.setState({ username })}
                     onChangeText={firstName => this.setState ({ firstName })}
-                    // autoCapitalize='none'
                     autoCorrect={false} 
                   />
                   <TextInput 
                     style={styles.input}
                     placeholder='Email'
-                    // placeholderTextColor='rgba(255,255,255,0.7)'
                     returnKeyType='next'
                     // onSubmitEditing={() => this.passwordInput.focus()}
                     onChangeText={email => this.setState ({ email })}
@@ -350,7 +351,7 @@ export default class ViroSample extends Component {
                     <TouchableOpacity 
                       style={styles.buttons}
                       onPress={() => this.submitLogin(this.state.email, this.state.password)}
-                      onPress={() => this.changeScreen('dashboard')}
+                      // onPress={() => this.changeScreen('dashboard')}
                     >
                       <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>

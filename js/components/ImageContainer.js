@@ -1,17 +1,6 @@
 import React from 'react'
 import { styles } from '../components/Styles'
-import { 
-    StyleSheet, 
-    View, 
-    Image, 
-    Text, 
-    TextInput, 
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    StatusBar,
-    Alert,
-    ScrollView
-} from 'react-native'
+import { ScrollView } from 'react-native'
 import ImageCard from './ImageCard'
 
 export default function ImageContainer ({ images, handleChange }) {

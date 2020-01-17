@@ -9,17 +9,18 @@ import {
   ViroPortal,
   ViroPortalScene,
   Viro3DObject,
-  ViroText,
-  ViroImage
+  ViroText
 } from 'react-viro';
 
-export default function MainScene ({ arSceneNavigator }) {
 
+export default class MainScene extends React.Component {
   
-    // console.warn(this.props.arSceneNavigator.viroAppProps[0].title)
+  showAR = () => {
+
+  }
+  
+  render(){
     return(
-
-
       <>
         <ViroARScene>
           <ViroAmbientLight color="#ffffff" intensity={200}/>
@@ -36,10 +37,10 @@ export default function MainScene ({ arSceneNavigator }) {
               type="VRX"
             />
             </ViroPortal>
-            <Viro360Image source={{ uri: arSceneNavigator.viroAppProps[0].url }} />
+            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[0].url }} />
           </ViroPortalScene>
           <ViroText 
-            text={arSceneNavigator.viroAppProps[0].title} 
+            text={this.props.arSceneNavigator.viroAppProps[0].title} 
             scale={[.5, .5, .5]} 
             position={[1, -1, -1]} 
             style={styles.ARTextStyle} 
@@ -88,6 +89,7 @@ export default function MainScene ({ arSceneNavigator }) {
         </ViroARScene>
       </>
     )
+  }
 }
 
 module.exports = MainScene;

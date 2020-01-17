@@ -2,13 +2,10 @@ import React from 'react'
 import { styles } from '../components/Styles'
 import { 
     View, 
-    Image, 
     Text, 
     TextInput, 
     TouchableOpacity,
     KeyboardAvoidingView,
-    StatusBar,
-    Alert
 } from 'react-native'
 
 export default class Account extends React.Component {
@@ -16,16 +13,12 @@ export default class Account extends React.Component {
     render(){
         return(
             <View style={styles.accountContainer}>
-                {/* <StatusBar 
-                    barStyle = 'light-content'
-                /> */}
-
                 <KeyboardAvoidingView 
                     behavior='padding'
                     style={styles.formContainer}
                 >
                     <View style={styles.loginContainer}>
-                        <Text>Change your password:</Text>
+                        <Text style={styles.accountText}>Change your password:</Text>
                         <TextInput 
                             style={styles.input} 
                             placeholder='Password'

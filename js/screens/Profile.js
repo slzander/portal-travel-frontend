@@ -1,14 +1,9 @@
 import React from 'react'
 import { 
-    StyleSheet, 
     View, 
     Image, 
     Text, 
-    TextInput, 
     TouchableOpacity,
-    KeyboardAvoidingView,
-    StatusBar,
-    Button
 } from 'react-native'
 import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles'
@@ -48,12 +43,6 @@ export default function Profile ({ handleChange, changeScreen, userImages }) {
                 >
                     <Text style={styles.buttonText}>Take me to AR!</Text>
                 </TouchableOpacity>
-                {/* <TouchableOpacity
-                    style={styles.buttons}
-                    onPress={() => changeScreen('account')}
-                >
-                    <Text style={styles.buttonText}>Account Settings</Text>
-                </TouchableOpacity> */}
             </View>
         </>
     )

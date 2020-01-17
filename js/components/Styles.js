@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-const colors = {
-    darkBlue: '#0c2461',
-    lightBlue: '#4a69bd',
-}
+// const colors = {
+//     darkBlue: '#0c2461',
+//     lightBlue: '#4a69bd',
+// }
 
 const styles = StyleSheet.create({
     indicator: {
@@ -173,8 +173,12 @@ const styles = StyleSheet.create({
     accountContainer: {
         flex: 1,
         backgroundColor: '#429BB2',
-        marginTop: 100,
+        paddingTop: 200,
     },
+    accountText: {
+        fontSize: 15,
+        marginBottom: 4,
+    }
 })
 
 export { styles }
