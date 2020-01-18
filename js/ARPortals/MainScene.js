@@ -12,13 +12,7 @@ import {
   ViroText
 } from 'react-viro';
 
-
-export default class MainScene extends React.Component {
-  
-  showAR = () => {
-
-  }
-  
+export default class MainScene extends React.Component {  
   render(){
     return(
       <>
@@ -54,13 +48,12 @@ export default class MainScene extends React.Component {
                             require('./portal_res/portal_wood_frame/portal_wood_frame_specular.png')]}
                 type="VRX"/>
             </ViroPortal>
-            {/* <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[1].url }} /> */}
-            {/* <Viro360Image source={{uri: 'https://www.yogjoshi.com/wp-content/uploads/2016/09/mountainscape-360_6_grid-e1472851404167.jpg'}} /> */}
-            <Viro360Image source={require("./portal_res/360_island.jpg")} />
+            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[1].url }} />
+            {/* <Viro360Image source={require("./portal_res/360_island.jpg")} /> */}
           </ViroPortalScene>
           <ViroText 
-            text={'A Beach Somewhere'} 
-            // text={this.props.arSceneNavigator.viroAppProps[1].title} 
+            // text={'A Beach Somewhere'} 
+            text={this.props.arSceneNavigator.viroAppProps[1].title} 
             scale={[.5, .5, .5]} 
             position={[0, -1, -2]} 
             style={styles.ARTextStyle} 
@@ -76,11 +69,11 @@ export default class MainScene extends React.Component {
                 rotation={[0, 45, 0]}
                 type="VRX"/>
             </ViroPortal>
-            <Viro360Image source={require("./portal_res/wework-front-desk.jpeg")} />
-            {/* <Viro360Image source={require("./portal_res/IMG_0540.jpeg")} /> */}
+            {/* <Viro360Image source={require("./portal_res/wework-front-desk.jpeg")} /> */}
+            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[2].url }} />
           </ViroPortalScene>
           <ViroText 
-            text={'WeWork'} 
+            text={this.props.arSceneNavigator.viroAppProps[2].title} 
             scale={[.5, .5, .5]} 
             position={[-1, -1, -1]} 
             style={styles.ARTextStyle} 

@@ -40,7 +40,6 @@ export default class ViroSample extends Component {
   state = {
     screen: '',
     images: [],
-    userImages: [],
     users: [],
     firstName: '',
     email: '',
@@ -57,11 +56,7 @@ export default class ViroSample extends Component {
     
     fetch(`${baseURL}user`)
       .then(response => response.json())
-      .then(users => 
-        this.setState({ users,
-           userImages : users[0].images })
-        )
-        // change this way of getting user images!!!!!
+      .then(users => this.setState({ users }))
   }
 
   submitPasswordChange = (password) => {
@@ -92,36 +87,14 @@ export default class ViroSample extends Component {
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(this.makeNewUser)
-        .then(console.warn(this.state.user))
-        // .then(this.assignDefaultImages)
-        .then(() => this.changeScreen('dashboard'))
     }
     catch(error){
       console.warn(error.toString())
     }
-  }
-
-  submitLogin = (email, password) => {
-    try{
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(this.updateCurrentUser)
-        .then(console.warn(this.state.user))
-        .then(() => this.changeScreen('dashboard'))
-    }
-    catch(error){
-      console.warn(error.toString())
-    }
-  }
-
-  updateCurrentUser = () => {
-    let currentUser = this.state.users.find(user => {
-      return user.username === this.state.email})
-      this.setState({ user: currentUser })
-      return this.changeScreen('dashboard')
   }
 
   makeNewUser = () => {
-    fetch(`${baseURL}user`, {
+    return fetch(`${baseURL}user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -131,11 +104,14 @@ export default class ViroSample extends Component {
         username: this.state.email,
         password_digest: this.state.password
       })
-    }).then(response => response.json())
-      .then(user => this.setState({ user }))
+    })
+    .then(response => response.json())
+    .then(user => this.setState({ user }))
+    .then(this.assignDefaultImages)
   }
 
   assignDefaultImages = () => {
+    console.warn(this.state.user)
     let i = 0
     while(i < 3){
       fetch(`${baseURL}user-images`, {
@@ -144,12 +120,66 @@ export default class ViroSample extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user_id: this.state.user.id,
-          image_id: this.state.images[i].id
+            user_id: this.state.user.id,
+            image_id: this.state.images[i].id
         })
       })
       i++
     }
+    setTimeout(this.setUserImages, 1000)
+  }
+
+  setUserImages = () => {
+    fetch(`${baseURL}user`)
+      .then(response => response.json())
+      .then(users => this.setUserState(users))
+      .then(() => this.changeScreen('dashboard'))
+  }
+
+  setUserState = (users) => {
+    let currentUser = users.find(user => {
+      return user.id === this.state.user.id})
+    console.warn(currentUser)
+    this.setState({ user: currentUser })
+  }
+
+  submitLogin = (email, password) => {
+    try{
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(this.updateCurrentUser)
+        // .then(() => console.warn(this.state.user))
+        .then(() => this.changeScreen('dashboard'))
+    }
+    catch(error){
+      console.warn(error.toString())
+    }
+  }
+
+  updateCurrentUser = () => {
+    // console.warn(this.state.users)
+    let currentUser = this.state.users.find(user => {
+      return user.username === this.state.email})
+      this.setState({ user: currentUser })
+    // console.warn(currentUser.username)
+  }
+
+  setCurrentImage = (currentImage) => {
+    this.setState({ currentImage })
+    this.changeScreen('gallery')
+  }
+
+  changeUserImage = (newImage) => {
+    fetch(`${baseURL}user-images/${this.state.currentImage.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.user.id,
+        image_id: newImage.id
+      })
+    }).then(userImage => console.warn(userImage))
+    .then(() => this.changeScreen('profile'))
   }
     
   deleteAccount = () => {
@@ -180,9 +210,12 @@ export default class ViroSample extends Component {
 
   getDashboardScreen = () => {
     return (
-      <>
-        {/* {this.state.user !== {} ? 
-          <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> : */}
+      // <>
+      // {this.state.user.images.length > 0 ? 
+      //   <View style={styles.container}>
+      //     <ActivityIndicator style={styles.indicator} size='large' color="#fff" />
+      //   </View> :
+        <>
           <View style={styles.containerWithFooter}>
             <Dashboard
             userName={this.state.email}
@@ -190,12 +223,13 @@ export default class ViroSample extends Component {
             users={this.state.users}
             user={this.state.user}
             />
-        </View>
-        <Footer
-          changeScreen={this.changeScreen}
-        />
-        {/* } */}
-      </>
+          </View>
+          <Footer
+            changeScreen={this.changeScreen}
+          />
+        </>
+      //   }
+      // </>
     )
   }
     
@@ -205,7 +239,7 @@ export default class ViroSample extends Component {
         <ViroARSceneNavigator 
           style={styles.ARScene}
           initialScene={{scene: InitialARScene}}
-          viroAppProps={this.state.userImages}
+          viroAppProps={this.state.user.images}
         />
         <Footer
           changeScreen={this.changeScreen}
@@ -217,11 +251,11 @@ export default class ViroSample extends Component {
   getProfileScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-          <Profile
-          changeScreen={this.changeScreen}
-          userImages={this.state.userImages}
-          handleChange={this.setCurrentImage}
-          />
+        <Profile
+        changeScreen={this.changeScreen}
+        user={this.state.user}
+        handleChange={this.setCurrentImage}
+        />
       </View>
     )
   }
@@ -229,36 +263,16 @@ export default class ViroSample extends Component {
   getAccountScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-          <Account
+        <Account
           changeScreen={this.changeScreen}
           passwordChange={this.passwordChange}
           deleteAccount={this.deleteAccount}
-          />
+        />
         <Footer
           changeScreen={this.changeScreen}
         />
       </View>
     )
-  }
-
-  setCurrentImage = (currentImage) => {
-    this.setState({ currentImage })
-    this.changeScreen('gallery')
-  }
-
-  changeUserImage = (newImage) => {
-  
-    fetch(`${baseURL}user-images/${this.state.currentImage.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: this.state.user.id,
-        image_id: newImage.id
-      })
-    }).then(userImage => console.warn(userImage))
-    .then(() => this.changeScreen('profile'))
   }
 
   getGalleryScreen = () => {

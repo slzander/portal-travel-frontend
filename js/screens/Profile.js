@@ -8,11 +8,11 @@ import {
 import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles'
 
-export default function Profile ({ handleChange, changeScreen, userImages }) {
+export default function Profile ({ handleChange, changeScreen, user }) {
     showUserImages = () => {
         return (
             <ImageContainer
-                images={userImages}
+                images={user.images}
                 handleChange={handleChange}
                 changeScreen={changeScreen}
             />
