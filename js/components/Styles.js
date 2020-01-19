@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
-// const colors = {
-//     darkBlue: '#0c2461',
-//     lightBlue: '#4a69bd',
-// }
+const colors = {
+    white: 'hsl(240, 1%, 86%)',
+    // black: 'hsl(240, 1%, 70%)',
+    black: 'hsl(0, 0%, 10%)',
+    backgroundColor: 'hsl(190, 17%, 50%)',
+}
 
 const styles = StyleSheet.create({
     indicator: {
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
     },
     logoContainer: {
         alignItems: 'center',
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     gearContainer: {
         flex: 1,
         alignItems: 'flex-end',
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
 
     },
     gear: {
@@ -50,11 +52,10 @@ const styles = StyleSheet.create({
     //     alignItems: 'flex-end'
     // },
     title: {
-        color: 'black',
+        color: colors.black,
         marginTop: 10,
         width: 160,
         textAlign: 'center',
-        opacity: 0.6,
         fontWeight: 'bold',
         fontSize: 24
     },
@@ -66,22 +67,22 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        backgroundColor: '#DCDCDD',
+        backgroundColor: colors.white,
         marginBottom: 20,
         paddingHorizontal: 10,
         borderRadius: 5,
     },
     buttons: {
         margin: 10,
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 70,
+        marginRight: 70,
         borderRadius: 5,
-        backgroundColor: '#177993',
+        backgroundColor: colors.black,
         paddingVertical: 15,
     },
     buttonText: {
         textAlign: 'center',
-        color: '#FFF',
+        color: colors.white,
         fontSize: 17,
     },
     ARTextStyle: {
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
     },
     profileHeaderText: {
         flex: 1,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
         flex: 7,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
     },
     chosenPhoto: {
         width: 300,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         marginBottom: 5,
-        backgroundColor: '#177993',
+        backgroundColor: colors.white,
     },
 
     image: {
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // flexDirection: 'column',
         // justifyContent: 'space-between',
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
     },
     dashboardImage: {
         flex: 1,
@@ -158,11 +159,12 @@ const styles = StyleSheet.create({
         marginTop: 100,
     },
     navBar: {
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
         paddingBottom: 20,
     },
     header: {
         fontSize: 22,
+        color: colors.black
     },
     listContainer: {
         margin: 2
@@ -172,7 +174,7 @@ const styles = StyleSheet.create({
     },
     accountContainer: {
         flex: 1,
-        backgroundColor: '#429BB2',
+        backgroundColor: colors.backgroundColor,
         paddingTop: 200,
     },
     accountText: {

@@ -41,11 +41,14 @@ export default class ViroSample extends Component {
     screen: '',
     images: [],
     users: [],
+    userImages: [],
+    currentImages: [],
     firstName: '',
     email: '',
     password: '',
     user: {},
-    currentImage: {}
+    oldImage: {},
+    oldUserImage: {}
   }
 
   componentDidMount(){
@@ -53,10 +56,12 @@ export default class ViroSample extends Component {
       .then(response => response.json())
       .then(images => this.setState({ images }))
       // .then(this.checkLoginStatus())
-    
     fetch(`${baseURL}user`)
       .then(response => response.json())
       .then(users => this.setState({ users }))
+    fetch(`${baseURL}user-images`)
+      .then(response => response.json())
+      .then(userImages => this.setState({ userImages }))
   }
 
   submitPasswordChange = (password) => {
@@ -74,14 +79,8 @@ export default class ViroSample extends Component {
 
   }
 
-  // checkLoginStatus = () => {
-  //   console.log('yo')
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if(user){
-  //       return this.getProfileScreen()
-  //     }
-  //   })
-  // }
+
+// SIGN UP
 
   submitSignUp = (email, password) =>{
     try{
@@ -94,7 +93,7 @@ export default class ViroSample extends Component {
   }
 
   makeNewUser = () => {
-    return fetch(`${baseURL}user`, {
+    fetch(`${baseURL}user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -111,7 +110,6 @@ export default class ViroSample extends Component {
   }
 
   assignDefaultImages = () => {
-    console.warn(this.state.user)
     let i = 0
     while(i < 3){
       fetch(`${baseURL}user-images`, {
@@ -126,29 +124,50 @@ export default class ViroSample extends Component {
       })
       i++
     }
-    setTimeout(this.setUserImages, 1000)
+    setTimeout(this.getUsers, 2000)
   }
 
-  setUserImages = () => {
+  getUsers = () => {
     fetch(`${baseURL}user`)
       .then(response => response.json())
-      .then(users => this.setUserState(users))
-      .then(() => this.changeScreen('dashboard'))
+      .then(users => this.setCurrentUser(users))
   }
 
-  setUserState = (users) => {
+  setCurrentUser = (users) => {
     let currentUser = users.find(user => {
       return user.id === this.state.user.id})
-    console.warn(currentUser)
     this.setState({ user: currentUser })
+    this.setCurrentImages()
   }
+
+  setCurrentImages = () => {
+    let filteredImages = this.state.images.filter(image => {
+      return (
+        this.state.user.images[0].id === image.id ||
+        this.state.user.images[1].id === image.id ||
+        this.state.user.images[2].id === image.id
+      )
+    })
+    this.setState({ currentImages: filteredImages })
+    this.checkLoginStatus()
+  }
+
+  checkLoginStatus = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        return this.changeScreen('dashboard')
+      }
+    })
+  }
+
+
+
+  // LOGIN
 
   submitLogin = (email, password) => {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(this.updateCurrentUser)
-        // .then(() => console.warn(this.state.user))
-        .then(() => this.changeScreen('dashboard'))
     }
     catch(error){
       console.warn(error.toString())
@@ -156,42 +175,98 @@ export default class ViroSample extends Component {
   }
 
   updateCurrentUser = () => {
-    // console.warn(this.state.users)
     let currentUser = this.state.users.find(user => {
       return user.username === this.state.email})
-      this.setState({ user: currentUser })
-    // console.warn(currentUser.username)
+    this.setState({ user: currentUser })
+    this.setCurrentImages()
   }
 
-  setCurrentImage = (currentImage) => {
-    this.setState({ currentImage })
-    this.changeScreen('gallery')
+
+
+
+  // UPDATE USER IMAGES
+
+  setOldImage = (clickedImage) => {
+    // console.warn('currentimages', this.state.currentImages)
+    this.setState({ oldImage: clickedImage })
+    setTimeout(this.setOldUserImage, 500)
   }
 
-  changeUserImage = (newImage) => {
-    fetch(`${baseURL}user-images/${this.state.currentImage.id}`, {
-      method: 'PUT',
+  setOldUserImage = () => {
+    // console.warn('oldimage', this.state.oldImage)
+    let oldUI = this.state.userImages.find(userImage => {
+      return this.state.oldImage.id === userImage.image_id && this.state.user.id === userImage.user_id
+    })
+    this.setState({ oldUserImage: oldUI })
+    setTimeout(() => this.changeScreen('gallery'), 500)
+  }
+
+  changeUserImage = (clickedImage) => {
+    // console.warn('olduserimage', this.state.oldUserImage)
+    fetch(`${baseURL}user-images/${this.state.oldUserImage.id}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         user_id: this.state.user.id,
-        image_id: newImage.id
+        image_id: clickedImage.id
       })
-    }).then(userImage => console.warn(userImage))
-    .then(() => this.changeScreen('profile'))
+    })
+    .then(response => response.json())
+    .then(newUserImage => this.updateCurrentUserImages(clickedImage, newUserImage))
   }
+
+  updateCurrentUserImages = (clickedImage, newUserImage) => {
+    let oldUserImageIndex = this.state.userImages.indexOf(this.state.oldUserImage)
+    let userImagesArray = this.state.userImages
+    userImagesArray[oldUserImageIndex]=newUserImage
+
+    // console.warn('oldUIindex', oldUserImageIndex)
+    this.setState({ userImages: userImagesArray })
+    setTimeout(() => this.updateCurrentImages(clickedImage), 500)
+  }
+
+    updateCurrentImages = (clickedImage) => {
+    // console.warn('userImages', this.state.userImages)
+    let index = this.state.currentImages.indexOf(this.state.oldImage)
+    let imagesArray = this.state.user.images
+    imagesArray[index]=clickedImage
+    this.setState({ currentImages: imagesArray })
+
+  // console.warn(this.state.currentImages)
+    setTimeout(() => this.changeScreen('profile'), 500)
+  }
+
+
+
+
+  // DELETE
     
   deleteAccount = () => {
-    let user = firebase.auth().currentUser
-    user.delete()
-      .then(
-        fetch(`${baseURL}user/${this.state.user.id}`, {
-          method: 'DELETE'
-        }).then(this.setState({ user: {} }))
+    firebase.auth().currentUser.delete()  
+      .then(this.deleteBackendUserImages)
+      // .catch(error => console.warn(error))
+  }
+
+  deleteBackendUserImages = () => {
+    let i = 2
+    while(i > -1){
+      fetch(`${baseURL}user-images/${this.state.user.images[i].id}`, {
+        method: 'DELETE'
+      })
+      i--
+    }
+    // setTimeout(this.deleteBackendUser, 5000)
+    setTimeout(this.changeScreen(''), 5000)
+  }
+
+  deleteBackendUser = () => {
+    // fetch(`${baseURL}user/${this.state.user.id}`, {
+    //       method: 'DELETE'
+    //     })
+        // .then(() => this.setState({ user: {} }))
         // .then(this.changeScreen(''))
-      )
-      .catch(error => console.warn(error))
   }
 
   // getLoginFormScreen = () => {
@@ -239,7 +314,7 @@ export default class ViroSample extends Component {
         <ViroARSceneNavigator 
           style={styles.ARScene}
           initialScene={{scene: InitialARScene}}
-          viroAppProps={this.state.user.images}
+          viroAppProps={this.state.images}
         />
         <Footer
           changeScreen={this.changeScreen}
@@ -254,7 +329,8 @@ export default class ViroSample extends Component {
         <Profile
         changeScreen={this.changeScreen}
         user={this.state.user}
-        handleChange={this.setCurrentImage}
+        currentImages={this.state.currentImages}
+        handleChange={this.setOldImage}
         />
       </View>
     )
@@ -264,8 +340,8 @@ export default class ViroSample extends Component {
     return (
       <View style={styles.containerWithFooter}>
         <Account
-          changeScreen={this.changeScreen}
           passwordChange={this.passwordChange}
+          submitPasswordChange={this.submitPasswordChange}
           deleteAccount={this.deleteAccount}
         />
         <Footer
@@ -281,8 +357,13 @@ export default class ViroSample extends Component {
       {this.state.images.length > 0 ?
         <Gallery
         handleChange={this.changeUserImage}
-        images={this.state.images}
-        currentImage={this.state.currentImage}
+        images={this.state.images.filter(image =>{
+          return (
+            image !== this.state.currentImages[0] &&
+            image !== this.state.currentImages[1] &&
+            image !== this.state.currentImages[2]
+            )
+        })}
         /> : console.warn('error')}
       <Footer
         changeScreen={this.changeScreen}
@@ -321,9 +402,9 @@ export default class ViroSample extends Component {
                 <View style={styles.logoContainer}>
                   <Image 
                     style={styles.logo}
-                    source={require('./js/images/doorway1.png')}
+                    source={require('./js/images/window.png')}
                   />
-                  <Text style={styles.title}>Travel Portals</Text>
+                  <Text style={styles.title}>Portal Travel</Text>
                 </View>
                 <KeyboardAvoidingView 
                   behavior='padding'
@@ -341,7 +422,7 @@ export default class ViroSample extends Component {
                     style={styles.input}
                     placeholder='Email'
                     returnKeyType='next'
-                    // onSubmitEditing={() => this.passwordInput.focus()}
+                    onSubmitEditing={() => this.passwordInput.focus()}
                     onChangeText={email => this.setState ({ email })}
                     keyboardType='email-address'
                     autoCapitalize='none'

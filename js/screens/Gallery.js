@@ -3,21 +3,19 @@ import { View } from 'react-native'
 import { styles } from '../components/Styles'
 import ImageContainer from '../components/ImageContainer'
 
-export default class Gallery extends Component {
+export default function Gallery ({ images, handleChange}) {    
     showImages = () => {
         return (
             <ImageContainer
-                images={this.props.images}
-                handleChange={this.props.handleChange}
+                images={images}
+                handleChange={handleChange}
             />
         )
     }
-
-    render() {
-        return (
-            <View>
-                {this.showImages()}
-            </View>
-        );
-    }
+    
+    return (
+        <View>
+            {this.showImages()}
+        </View>
+    );
 }
