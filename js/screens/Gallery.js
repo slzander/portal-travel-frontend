@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native'
-import { styles } from '../components/Styles'
+// import { styles } from '../components/Styles'
 import ImageContainer from '../components/ImageContainer'
+// import { styles } from '../components/Styles';
 
 export default function Gallery ({ images, handleChange}) {    
     showImages = () => {

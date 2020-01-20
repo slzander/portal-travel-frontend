@@ -12,6 +12,7 @@ export default function Profile ({ handleChange, changeScreen, user, currentImag
     showUserImages = () => {
         return (
             <ImageContainer
+                style={styles.imageContainer}
                 images={currentImages}
                 handleChange={handleChange}
                 changeScreen={changeScreen}

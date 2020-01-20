@@ -13,7 +13,7 @@ export default function ImageContainer ({ images, handleChange }) {
     })
 
     return(
-        <ScrollView>
+        <ScrollView style={styles.galleryContainer}>
             {imageArray}
         </ScrollView>
     )

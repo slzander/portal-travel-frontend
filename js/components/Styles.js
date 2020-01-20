@@ -1,9 +1,9 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 const colors = {
     white: 'hsl(240, 1%, 86%)',
-    // black: 'hsl(240, 1%, 70%)',
-    black: 'hsl(0, 0%, 10%)',
+    black: 'hsl(0, 0%, 0%)',
+    blackish: 'hsl(0, 0%, 10%)',
     backgroundColor: 'hsl(190, 17%, 50%)',
 }
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        flex: 1,
+        flex: 3,
         backgroundColor: colors.backgroundColor,
     },
     logoContainer: {
@@ -26,38 +26,35 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center'
     },
-    gearContainer: {
-        // alignItems: 'center',
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
     logo: {
-        width: 150,
-        height: 150
+        width: 210,
+        height: 210
+    },
+    logoWords: {
+        marginTop: -143,
+    },
+    title: {
+        color: colors.black,
+        margin: 3,
+        // fontFamily: 'Futura-MediumItalic',
+        fontFamily: 'Futura-CondensedMedium',
+        // marginTop: -80,
+        // width: 160,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 26
     },
     gearContainer: {
         flex: 1,
         alignItems: 'flex-end',
         backgroundColor: colors.backgroundColor,
-
     },
     gear: {
         width: 30,
         height: 30,
         marginRight: 25,
-        // marginTop: 15,
-        margin: 45
-    },
-    // gearButton: {
-    //     alignItems: 'flex-end'
-    // },
-    title: {
-        color: colors.black,
-        marginTop: 10,
-        width: 160,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 24
+        marginTop: 25,
+        margin: 15
     },
     formContainer: {
         padding: 20
@@ -73,12 +70,28 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     buttons: {
-        margin: 10,
-        marginLeft: 70,
-        marginRight: 70,
+        marginBottom: 10,
+        marginTop: 17,
+        marginLeft: 90,
+        marginRight: 90,
         borderRadius: 5,
-        backgroundColor: colors.black,
+        backgroundColor: colors.blackish,
         paddingVertical: 15,
+    },
+    loginButtonContainer: {
+        justifyContent: 'center',
+        flexDirection: 'row'
+    },
+    loginButtons: {
+        justifyContent: 'space-around',
+        marginTop: 17,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 5,
+        backgroundColor: colors.blackish,
+        paddingVertical: 15,
+        paddingHorizontal: 25,
+        width: 130,
     },
     buttonText: {
         textAlign: 'center',
@@ -104,7 +117,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     profileContainer: {
-        // paddingTop: 50,
         flex: 7,
         alignItems: 'center',
         justifyContent: 'center',
@@ -114,13 +126,15 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300
     },
+    galleryContainer: {
+        marginTop: 45,
+    },
     imageCard: {
         padding: 10,
         margin: 5,
         marginBottom: 5,
         backgroundColor: colors.white,
     },
-
     image: {
         width: 340,
         height: 170
@@ -137,22 +151,26 @@ const styles = StyleSheet.create({
         backgroundColor: colors.backgroundColor,
     },
     dashboardImage: {
-        flex: 1,
+        flex: 3,
+        alignSelf: 'center',
+
         position: 'absolute',
         // justifyContent: 'center',
         // alignItems: 'center',
         marginTop: 170,
         // paddingTop: 100,
         marginLeft: 10,
-        width: '95%',
-        height: '95%',
+        width: '90%',
+        height: '90%',
     },
     gif: {
-        width: 310,
-        height: 510,
+        flex: 1,
+        alignSelf: 'center',
+
+        width: 293,
+        height: 550,
         // paddingTop: 60,
-        marginTop: 120,
-        marginLeft: 33,
+        marginTop: -370,
     },
     dashboardInfo: {
         flex: 1,
@@ -163,8 +181,10 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     header: {
-        fontSize: 22,
-        color: colors.black
+        // flex: 1,
+        alignSelf: 'center',
+        fontSize: 28,
+        color: colors.blackish
     },
     listContainer: {
         margin: 2

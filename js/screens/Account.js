@@ -8,7 +8,7 @@ import {
     KeyboardAvoidingView,
 } from 'react-native'
 
-export default function Account ({ passwordChange, submitPasswordChange, deleteAccount }) {
+export default function Account ({ deleteAccount, submitLogOut }) {
     return(
         <View style={styles.accountContainer}>
             <KeyboardAvoidingView 
@@ -34,15 +34,15 @@ export default function Account ({ passwordChange, submitPasswordChange, deleteA
                         >
                             <Text style={styles.buttonText}>Save Changes</Text>
                         </TouchableOpacity> */}
-                        {/* <TouchableOpacity 
-                            style={styles.buttons}
-                            onPress={() => changeScreen('dashboard')}
-                        >
-                            <Text style={styles.buttonText}>Go back</Text>
-                        </TouchableOpacity> */}
                         <TouchableOpacity 
                             style={styles.buttons}
-                            onPress={() => deleteAccount()}
+                            onPress={submitLogOut}
+                        >
+                            <Text style={styles.buttonText}>Log Out</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.buttons}
+                            onPress={deleteAccount}
                         >
                             <Text style={styles.buttonText}>Delete Account</Text>
                         </TouchableOpacity>
