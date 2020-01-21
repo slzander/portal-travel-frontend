@@ -44,36 +44,23 @@ export default class ViroSample extends Component {
     user: {},
     oldImage: {},
     oldUserImage: {},
-    // gif: 'https://i.giphy.com/media/KDtcq2KBq4hA0neYoX/giphy.gif'
     gif: 'https://i.giphy.com/media/cLBc38pwucMQi9Oooh/giphy.gif'
   }
 
   componentDidMount() {
     fetch(`${baseURL}images`)
       .then(response => response.json())
-      .then(images => this.setState({ images }))
+      .then(images => this.setState({ images,
+        //  currentImages: images.slice(0, 3)
+        
+        // get rid of these current images!!!
+        }))
     fetch(`${baseURL}user`)
       .then(response => response.json())
       .then(users => this.setState({ users }))
     fetch(`${baseURL}user-images`)
       .then(response => response.json())
-      .then(userImages => this.setState({ userImages }))
   }
-
-  // submitPasswordChange = (password) => {
-  //   fetch(`${baseURL}user`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       password_digest: this.state.password
-  //     })
-  //   }).then(response => response.json())
-  //     .then(user => console.warn(user))
-  //   // .then(user => this.setState({ user }))
-
-  // }
 
 
   // SET STATE FROM SIGN IN/LOGIN FORMS
@@ -93,6 +80,7 @@ export default class ViroSample extends Component {
   goBack = () => {
     this.changeScreen('')
   }
+
 
 
   // SIGN UP
@@ -220,8 +208,6 @@ export default class ViroSample extends Component {
 
 
 
-
-
   // UPDATE USER IMAGES
 
   setOldImage = (clickedImage) => {
@@ -343,6 +329,7 @@ export default class ViroSample extends Component {
         setFirstName={this.setFirstName}
         setEmail={this.setEmail}
         setPassword={this.setPassword}
+        goBack={this.goBack}
       />
     )
   }
@@ -353,6 +340,7 @@ export default class ViroSample extends Component {
         submitLogin={this.submitLogin}
         setEmail={this.setEmail}
         setPassword={this.setPassword}
+        goBack={this.goBack}
       />
     )
   }
@@ -364,11 +352,9 @@ export default class ViroSample extends Component {
           <Dashboard
             user={this.state.user}
             gif={this.state.gif}
-          />
+            changeScreen={this.changeScreen}
+            />
         </View>
-        <Footer
-          changeScreen={this.changeScreen}
-        />
       </>
     )
   }
@@ -454,9 +440,10 @@ export default class ViroSample extends Component {
       default:
         return (
           <View style={styles.container}>
-            {this.state.images.length < 11 ?
+            {this.state.images.length < 12 ?
               <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
               this.getSignUpOrLogInScreen()
+              // this.getProfileScreen()
             }
           </View>
         )

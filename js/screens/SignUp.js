@@ -15,7 +15,7 @@ export default function SignUp({
     setFirstName,
     setEmail,
     setPassword,
-    goBack
+    goBack,
 }) {
 
     return (
