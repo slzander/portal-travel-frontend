@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles';
 
-export default function Gallery ({ images, handleChange}) {    
+export default function Gallery({ images, handleChange }) {
     showImages = () => {
         return (
             <ImageContainer
@@ -12,10 +12,12 @@ export default function Gallery ({ images, handleChange}) {
             />
         )
     }
-    
+
     return (
         <View style={styles.container}>
-            {this.showImages()}
+            <View style={styles.galleryContainer}>
+                {this.showImages()}
+            </View>
         </View>
     );
 }

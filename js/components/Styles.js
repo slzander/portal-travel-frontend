@@ -7,8 +7,13 @@ const colors = {
     backgroundColor: 'hsl(190, 17%, 50%)',
 }
 
+const fonts = {
+    mainFont: 'Futura-Medium',
+}
+
 const styles = StyleSheet.create({
 
+    
     // APP:
 
     containerWithFooter: {
@@ -21,6 +26,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
 
+
     // LOGIN/SIGNUP:
 
     logoContainer: {
@@ -32,21 +38,6 @@ const styles = StyleSheet.create({
         width: 250,
         height: 250
     },
-    // logoWords: {
-    //     marginTop: -143,
-    // },
-    // title: {
-    //     color: colors.black,
-    //     margin: 3,
-    //     // fontFamily: 'Futura-MediumItalic',
-    //     fontFamily: 'Futura-CondensedMedium',
-    //     // marginTop: -80,
-    //     // width: 160,
-    //     textAlign: 'center',
-    //     fontWeight: 'bold',
-    //     fontSize: 26
-    // },
-
     formContainer: {
         padding: 20
     },
@@ -59,8 +50,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 10,
         borderRadius: 5,
+        fontFamily: fonts.mainFont,
     },
-
     loginButtonContainer: {
         justifyContent: 'center',
         flexDirection: 'row'
@@ -77,6 +68,7 @@ const styles = StyleSheet.create({
         width: 130,
     },
 
+
     // DASHBOARD:
 
     dashboardContainer: {
@@ -87,12 +79,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 32,
         color: colors.blackish,
-        marginBottom: 5
+        marginBottom: 5,
+        fontFamily: fonts.mainFont,
     },
     dashboardText: {
         alignSelf: 'center',
         fontSize: 18,
-        color: colors.blackish
+        color: colors.blackish,
+        fontFamily: fonts.mainFont,
     },
     dashboardInfo: {
         flex: 1,
@@ -112,6 +106,7 @@ const styles = StyleSheet.create({
         width: 294,
         marginTop: -295,
     },
+
 
     // PROFILE: 
 
@@ -133,29 +128,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.backgroundColor,
     },
+    profileText: {
+        fontSize: 15,
+        color: colors.blackish,
+        fontFamily: fonts.mainFont,
+    },
 
-    // profileHeader: {
-    //     paddingTop: 120,
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     backgroundColor: colors.backgroundColor,
-    // },
-    // profileHeaderText: {
-    //     flex: 1,
-    // },
-    
 
     // AR:
 
     ARTextStyle: {
-        fontFamily: 'Arial',
         fontSize: 20,
-        color: '#ffffff',
+        color: colors.whiteish,
         textAlignVertical: 'center',
         textAlign: 'center'
     },
+
 
     // ACCOUNT:
 
@@ -165,8 +153,46 @@ const styles = StyleSheet.create({
         paddingTop: 200,
     },
 
+
+    // IMAGE CONTAINER:
+
+    imageContainer: {
+        marginTop: 10,
+        marginBottom: 5,
+    },
+
+
+    // GALLERY:
+
+    galleryContainer: {
+        flex: 1,
+        marginTop: 40,
+        marginBottom: 40,
+        backgroundColor: colors.backgroundColor,
+    },
+
+    // IMAGE CARD:
+
+    imageCard: {
+        padding: 10,
+        margin: 5,
+        marginBottom: 5,
+        backgroundColor: colors.whiteish,
+    },
+    image: {
+        width: 340,
+        height: 170
+    },
+    imageText: {
+        paddingTop: 7,
+        fontSize: 15,
+        textAlign: 'center',
+        fontFamily: fonts.mainFont,
+    },
+
+
     // MULTIPLE COMPONENTS:
-    
+
     container: {
         flex: 3,
         backgroundColor: colors.backgroundColor,
@@ -174,7 +200,8 @@ const styles = StyleSheet.create({
     header: {
         alignSelf: 'center',
         fontSize: 28,
-        color: colors.blackish
+        color: colors.blackish,
+        fontFamily: fonts.mainFont,
     },
     navBar: {
         backgroundColor: colors.backgroundColor,
@@ -193,43 +220,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.whiteish,
         fontSize: 17,
+        fontFamily: fonts.mainFont,
     },
-    // chosenPhoto: {
-    //     width: 300,
-    //     height: 300
-    // },
-
-
-    // IMAGE CONTAINER:
-
-    galleryContainer: {
-        marginTop: 10,
-        marginBottom: 5,
-    },
-
-    // IMAGE CARD:
-
-    imageCard: {
-        padding: 10,
-        margin: 5,
-        marginBottom: 5,
-        backgroundColor: colors.whiteish,
-    },
-    image: {
-        width: 340,
-        height: 170
-    },
-    imageText: {
-        paddingTop: 7,
-        fontSize: 15,
-        textAlign: 'center'
-    },
-    // listContainer: {
-    //     margin: 2
-    // },
-    // listItems: {
-    //     fontSize: 25
-    // },
 })
 
 export { styles }
