@@ -31,10 +31,10 @@ export default class MainScene extends React.Component {
               type="VRX"
             />
             </ViroPortal>
-            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[0].url }} />
+            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[2].url }} />
           </ViroPortalScene>
           <ViroText 
-            text={this.props.arSceneNavigator.viroAppProps[0].title} 
+            text={this.props.arSceneNavigator.viroAppProps[2].title} 
             scale={[.5, .5, .5]} 
             position={[1, -1, -1]} 
             style={styles.ARTextStyle} 
@@ -70,10 +70,10 @@ export default class MainScene extends React.Component {
                 type="VRX"/>
             </ViroPortal>
             {/* <Viro360Image source={require("./portal_res/wework-front-desk.jpeg")} /> */}
-            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[2].url }} />
+            <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[0].url }} />
           </ViroPortalScene>
           <ViroText 
-            text={this.props.arSceneNavigator.viroAppProps[2].title} 
+            text={this.props.arSceneNavigator.viroAppProps[0].title} 
             scale={[.5, .5, .5]} 
             position={[-1, -1, -1]} 
             style={styles.ARTextStyle} 

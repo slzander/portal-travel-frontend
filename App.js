@@ -44,22 +44,19 @@ export default class ViroSample extends Component {
     user: {},
     oldImage: {},
     oldUserImage: {},
-    gif: 'https://i.giphy.com/media/cLBc38pwucMQi9Oooh/giphy.gif'
+    gif: 'https://i.giphy.com/media/XHYqOOtGLB2K857Chh/giphy.gif'
   }
 
   componentDidMount() {
     fetch(`${baseURL}images`)
       .then(response => response.json())
-      .then(images => this.setState({ images,
-        //  currentImages: images.slice(0, 3)
-        
-        // get rid of these current images!!!
-        }))
+      .then(images => this.setState({ images }))
     fetch(`${baseURL}user`)
       .then(response => response.json())
       .then(users => this.setState({ users }))
     fetch(`${baseURL}user-images`)
       .then(response => response.json())
+      .then(userImages => this.setState({ userImages }))
   }
 
 
@@ -217,7 +214,7 @@ export default class ViroSample extends Component {
   }
 
   setOldUserImage = () => {
-    // console.warn('oldimage', this.state.oldImage)
+    // console.warn('oldimage', this.state.userImages)
     let oldUI = this.state.userImages.find(userImage => {
       return this.state.oldImage.id === userImage.image_id && this.state.user.id === userImage.user_id
     })
