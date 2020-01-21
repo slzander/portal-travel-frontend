@@ -1,97 +1,72 @@
 import React from 'react'
-// import LoginForm from './LoginForm'
-// import SignUp from './SignUp'
-// import Dashboard from './Dashboard'
-
-import { 
-    StyleSheet, 
-    View, 
-    Image, 
-    Text, 
-    TextInput, 
+import { styles } from '../components/Styles'
+import {
+    View,
+    Image,
+    Text,
+    TextInput,
     TouchableOpacity,
     KeyboardAvoidingView,
-    StatusBar
+    StatusBar,
 } from 'react-native'
-import { checkMisnamedProps } from 'react-viro/components/Utilities/ViroProps'
 
+export default function Login({
+    submitLogin,
+    setEmail,
+    setPassword,
+    goBack
+}) {
 
-export default function Login({ changeScreen }) {
-    console.warn(changeScreen)
-    return(
+    return (
         <View style={styles.container}>
-            <StatusBar 
-                barStyle = 'light-content'
+            <StatusBar
+                barStyle='dark-content'
             />
             <View style={styles.logoContainer}>
-                <Image 
+                <Image
                     style={styles.logo}
-                    source={require('../images/mountain.png')}
+                    source={require('../images/PTlogoLarge.png')}
                 />
-                <Text style={styles.title}>Travel With Me</Text>
             </View>
-            <View style={styles.buttons}>
-                <TouchableOpacity 
-                    style={styles.buttonContainer}
-                    onPress={() => changeScreen('signUp')}
-                >
-                    <Text style={styles.buttonText}>Sign Up</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.buttonContainer}
-                    onPress={() => changeScreen('loginForm')}
-                >
-                        <Text style={styles.buttonText}>Login</Text>
-                </TouchableOpacity>
-            </View>
+            <KeyboardAvoidingView
+                behavior='padding'
+                style={styles.formContainer}
+            >
+                <View style={styles.loginContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Email'
+                        returnKeyType='next'
+                        onSubmitEditing={() => this.passwordInput.focus()}
+                        onChangeText={email => setEmail(email)}
+                        keyboardType='email-address'
+                        autoCapitalize='none'
+                        autoCorrect={false}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Password'
+                        onChangeText={password => setPassword(password)}
+                        secureTextEntry
+                        returnKeyType='go'
+                        ref={(input) => this.passwordInput = input}
+                    />
+                    <View style={styles.loginButtonContainer}>
+                        <TouchableOpacity
+                            style={styles.loginButtons}
+                            onPress={goBack}
+                        >
+                            <Text style={styles.buttonText}>Go Back</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.loginButtons}
+                            onPress={submitLogin}
+                        >
+                            <Text style={styles.buttonText}>Log In</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3498db',
-    },
-    logoContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
-    logo: {
-        width: 100,
-        height: 100
-    },
-    title: {
-        color: '#FFF',
-        marginTop: 10,
-        width: 160,
-        textAlign: 'center',
-        opacity: 0.6
-    },
-    formContainer: {
-        padding: 20
-    },
-    input: {
-        height: 40,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        color: '#FFF',
-        marginBottom: 20,
-        paddingHorizontal: 10
-    },
-    loginContainer: {
-        marginBottom: 60
-    },
-    buttons: {
-        marginBottom: 40    
-    },
-    buttonContainer: {
-        backgroundColor: '#2980b9',
-        paddingVertical: 20,
-        margin: 10
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFF'
-    }
-})

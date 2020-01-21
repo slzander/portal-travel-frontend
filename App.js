@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Login from './js/screens/Login'
-import LoginForm from './js/screens/LoginForm'
+import SignUpOrLogIn from './js/screens/SignUpOrLogIn'
 import SignUp from './js/screens/SignUp'
+import Login from './js/screens/Login'
 import Dashboard from './js/screens/Dashboard'
 import Profile from './js/screens/Profile'
 import Account from './js/screens/Account'
@@ -9,13 +9,8 @@ import Gallery from './js/screens/Gallery'
 import { styles } from './js/components/Styles'
 import Footer from './js/components/Footer'
 import {
-  Text,
   View,
-  TextInput,
-  Image,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 import firebase from 'firebase'
@@ -49,7 +44,8 @@ export default class ViroSample extends Component {
     user: {},
     oldImage: {},
     oldUserImage: {},
-    gif: 'https://i.giphy.com/media/KDtcq2KBq4hA0neYoX/giphy.gif'
+    // gif: 'https://i.giphy.com/media/KDtcq2KBq4hA0neYoX/giphy.gif'
+    gif: 'https://i.giphy.com/media/cLBc38pwucMQi9Oooh/giphy.gif'
   }
 
   componentDidMount() {
@@ -64,27 +60,50 @@ export default class ViroSample extends Component {
       .then(userImages => this.setState({ userImages }))
   }
 
-  submitPasswordChange = (password) => {
-    fetch(`${baseURL}user`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        password_digest: this.state.password
-      })
-    }).then(response => response.json())
-      .then(user => console.warn(user))
-    // .then(user => this.setState({ user }))
+  // submitPasswordChange = (password) => {
+  //   fetch(`${baseURL}user`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       password_digest: this.state.password
+  //     })
+  //   }).then(response => response.json())
+  //     .then(user => console.warn(user))
+  //   // .then(user => this.setState({ user }))
 
+  // }
+
+
+  // SET STATE FROM SIGN IN/LOGIN FORMS
+
+  setFirstName = (firstName) => {
+    this.setState({ firstName })
+  }
+
+  setEmail = (email) => {
+    this.setState({ email })
+  }
+
+  setPassword = (password) => {
+    this.setState({ password })
+  }
+
+  goBack = () => {
+    this.changeScreen('')
   }
 
 
   // SIGN UP
 
-  submitSignUp = (email, password) => {
+  goToSignUp = () => {
+    this.changeScreen('signup')
+  }
+
+  submitSignUp = () => {
     try {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(this.makeNewUser)
     }
     catch (error) {
@@ -177,9 +196,13 @@ export default class ViroSample extends Component {
 
   // LOGIN
 
-  submitLogin = (email, password) => {
+  goToLogin = () => {
+    this.changeScreen('login')
+  }
+
+  submitLogin = () => {
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(this.updateCurrentUser)
     }
     catch (error) {
@@ -274,18 +297,6 @@ export default class ViroSample extends Component {
     // .catch(error => console.warn(error))
   }
 
-  // deleteBackendUserImages = () => {
-  //   let i = 2
-  //   while(i > -1){
-  //     fetch(`${baseURL}user-images/${this.state.user.images[i].id}`, {
-  //       method: 'DELETE'
-  //     })
-  //     i--
-  //   }
-  //   setTimeout(this.deleteBackendUser, 5000)
-  //   // setTimeout(this.changeScreen(''), 5000)
-  // }
-
   deleteBackendUser = () => {
     fetch(`${baseURL}user/${this.state.user.id}`, {
       method: 'DELETE'
@@ -296,7 +307,6 @@ export default class ViroSample extends Component {
 
 
   //  LOG OUT
-
 
   submitLogOut = () => {
     try {
@@ -313,41 +323,52 @@ export default class ViroSample extends Component {
     this.changeScreen('')
   }
 
+
+
   // SCREEN NAVIGATION
 
-  // getLoginFormScreen = () => {
-  //   return (
-  //     <LoginForm
-  //       submitSignUp={this.submitSignUp}
-  //       submitLogin={this.submitLogin}
-  //       setFirstName={this.setFirstName}
-  //       setEmail={this.setEmail}
-  //       setPassword={this.setPassword}
-  //       email={this.state.email}
-  //       password={this.state.password}
-  //     />
-  //   )
-  // }
+  getSignUpOrLogInScreen = () => {
+    return (
+      <SignUpOrLogIn
+        goToSignUp={this.goToSignUp}
+        goToLogin={this.goToLogin}
+      />
+    )
+  }
+
+  getSignUpScreen = () => {
+    return (
+      <SignUp
+        submitSignUp={this.submitSignUp}
+        setFirstName={this.setFirstName}
+        setEmail={this.setEmail}
+        setPassword={this.setPassword}
+      />
+    )
+  }
+
+  getLoginScreen = () => {
+    return (
+      <Login
+        submitLogin={this.submitLogin}
+        setEmail={this.setEmail}
+        setPassword={this.setPassword}
+      />
+    )
+  }
 
   getDashboardScreen = () => {
     return (
       <>
-        {/* {this.state.gif ? 
-        <View style={styles.container}>
-          <ActivityIndicator style={styles.indicator} size='large' color="#fff" />
-        </View> : */}
-        <>
-          <View style={styles.containerWithFooter}>
-            <Dashboard
-              user={this.state.user}
-              gif={this.state.gif}
-            />
-          </View>
-          <Footer
-            changeScreen={this.changeScreen}
+        <View style={styles.containerWithFooter}>
+          <Dashboard
+            user={this.state.user}
+            gif={this.state.gif}
           />
-        </>
-        {/* } */}
+        </View>
+        <Footer
+          changeScreen={this.changeScreen}
+        />
       </>
     )
   }
@@ -405,9 +426,6 @@ export default class ViroSample extends Component {
             handleChange={this.changeUserImage}
             images={this.state.galleryImages}
           /> : console.warn('error')}
-        <Footer
-          changeScreen={this.changeScreen}
-        />
       </View>
     )
   }
@@ -419,8 +437,10 @@ export default class ViroSample extends Component {
 
   getScreen = () => {
     switch (this.state.screen) {
-      case 'loginForm':
-        return this.getLoginFormScreen()
+      case 'signup':
+        return this.getSignUpScreen()
+      case 'login':
+        return this.getLoginScreen()
       case 'dashboard':
         return this.getDashboardScreen()
       case 'AR':
@@ -432,70 +452,11 @@ export default class ViroSample extends Component {
       case 'account':
         return this.getAccountScreen()
       default:
-        // return this.getLoginFormScreen()
         return (
           <View style={styles.container}>
-            {this.state.images.length < 11 && this.state.currentImages < 3 ?
+            {this.state.images.length < 11 ?
               <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
-              <>
-                <View style={styles.logoContainer}>
-                  <Image
-                    style={styles.logo}
-                    source={require('./js/images/window.png')}
-                  />
-                  <View style={styles.logoWords}>
-                    <Text style={styles.title}>PORTAL</Text>
-                    <Text style={styles.title}>TRAVEL</Text>
-                  </View>
-                </View>
-                <KeyboardAvoidingView
-                  behavior='padding'
-                  style={styles.formContainer}
-                >
-                  <View style={styles.loginContainer}>
-                    {/* <TextInput 
-                    style={styles.input}
-                    placeholder='First Name'
-                    returnKeyType='next'
-                    onChangeText={firstName => this.setState ({ firstName })}
-                    autoCorrect={false} 
-                  /> */}
-                    <TextInput
-                      style={styles.input}
-                      placeholder='Email'
-                      returnKeyType='next'
-                      onSubmitEditing={() => this.passwordInput.focus()}
-                      onChangeText={email => this.setState({ email })}
-                      keyboardType='email-address'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                    />
-                    <TextInput
-                      style={styles.input}
-                      placeholder='Password'
-                      onChangeText={password => this.setState({ password })}
-                      secureTextEntry
-                      returnKeyType='go'
-                      ref={(input) => this.passwordInput = input}
-                    />
-                    <View style={styles.loginButtonContainer}>
-                      <TouchableOpacity
-                        style={styles.loginButtons}
-                        onPress={() => this.submitSignUp(this.state.email, this.state.password)}
-                      >
-                        <Text style={styles.buttonText}>Sign Up</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.loginButtons}
-                        onPress={() => this.submitLogin(this.state.email, this.state.password)}
-                      // onPress={() => this.changeScreen('dashboard')}
-                      >
-                        <Text style={styles.buttonText}>Login</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </KeyboardAvoidingView>
-              </>
+              this.getSignUpOrLogInScreen()
             }
           </View>
         )

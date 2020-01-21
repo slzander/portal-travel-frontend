@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        width: 210,
-        height: 210
+        width: 250,
+        height: 250
     },
     logoWords: {
         marginTop: -143,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         marginRight: 25,
-        marginTop: 25,
+        marginTop: 50,
         margin: 15
     },
     formContainer: {
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     },
     galleryContainer: {
         marginTop: 45,
+        marginBottom: 35,
     },
     imageCard: {
         padding: 10,
@@ -146,19 +147,13 @@ const styles = StyleSheet.create({
     },
     dashboardContainer: {
         flex: 1,
-        // flexDirection: 'column',
-        // justifyContent: 'space-between',
         backgroundColor: colors.backgroundColor,
     },
     dashboardImage: {
         flex: 3,
         alignSelf: 'center',
-
         position: 'absolute',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         marginTop: 170,
-        // paddingTop: 100,
         marginLeft: 10,
         width: '90%',
         height: '90%',
@@ -168,7 +163,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
 
         width: 293,
-        height: 550,
+        height: 590,
         // paddingTop: 60,
         marginTop: -370,
     },

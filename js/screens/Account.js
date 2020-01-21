@@ -1,17 +1,21 @@
 import React from 'react'
 import { styles } from '../components/Styles'
-import { 
-    View, 
-    Text, 
-    TextInput, 
+import {
+    View,
+    Text,
+    TextInput,
     TouchableOpacity,
     KeyboardAvoidingView,
+    StatusBar
 } from 'react-native'
 
-export default function Account ({ deleteAccount, submitLogOut }) {
-    return(
+export default function Account({ deleteAccount, submitLogOut }) {
+    return (
         <View style={styles.accountContainer}>
-            <KeyboardAvoidingView 
+            <StatusBar
+                barStyle='dark-content'
+            />
+            <KeyboardAvoidingView
                 behavior='padding'
                 style={styles.formContainer}
             >
@@ -34,13 +38,13 @@ export default function Account ({ deleteAccount, submitLogOut }) {
                         >
                             <Text style={styles.buttonText}>Save Changes</Text>
                         </TouchableOpacity> */}
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={styles.buttons}
                             onPress={submitLogOut}
                         >
                             <Text style={styles.buttonText}>Log Out</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={styles.buttons}
                             onPress={deleteAccount}
                         >

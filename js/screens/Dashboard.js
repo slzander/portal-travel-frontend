@@ -3,29 +3,16 @@ import {
     View,
     Text,
     Image,
+    StatusBar
 } from 'react-native'
 import { styles } from '../components/Styles'
 
 export default function Dashboard({ user, gif }) {
-
-    
-    
-    // showPhoneImages = () => {
-    //     <View style={styles.logoContainer}>
-    //         <Image
-    //             style={styles.logo}
-    //             source={require('../images/window.png')}
-    //         />
-    //         <View style={styles.logoWords}>
-    //             <Text style={styles.title}>TRAVEL</Text>
-    //             <Text style={styles.titleSmall}>THROUGH</Text>
-    //             <Text style={styles.title}>PORTALS</Text>
-    //         </View>
-    //     </View>
-    // }
-
     return (
         <View style={styles.dashboardContainer}>
+            <StatusBar
+                barStyle='dark-content'
+            />
             <View style={styles.dashboardInfo}>
                 <Text style={styles.header}>Welcome {user.first_name}!</Text>
             </View>
@@ -35,9 +22,7 @@ export default function Dashboard({ user, gif }) {
             />
             <Image
                 style={styles.gif}
-                // defaultSource={
-                //     {uri: 'https://i.imgur.com/pIJIIpU.png', width: 50}
-                // }
+                defaultSource={require('../images/PTlogoSmall.png')}
                 source={{ uri: gif }}
             // source={{uri : 'https://i.giphy.com/media/KDtcq2KBq4hA0neYoX/giphy.gif'}}
             // source={require('../images/beachgif.gif')}

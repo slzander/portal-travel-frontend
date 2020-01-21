@@ -1,14 +1,15 @@
 import React from 'react'
-import { 
-    View, 
-    Image, 
-    Text, 
+import {
+    View,
+    Image,
+    Text,
     TouchableOpacity,
+    StatusBar
 } from 'react-native'
 import ImageContainer from '../components/ImageContainer'
 import { styles } from '../components/Styles'
 
-export default function Profile ({ handleChange, changeScreen, user, currentImages }) {
+export default function Profile({ handleChange, changeScreen, user, currentImages }) {
     showUserImages = () => {
         return (
             <ImageContainer
@@ -20,16 +21,19 @@ export default function Profile ({ handleChange, changeScreen, user, currentImag
         )
     }
 
-    return(
+    return (
         <>
+            <StatusBar
+                barStyle='dark-content'
+            />
             <View style={styles.gearContainer}>
                 <TouchableOpacity
                     style={styles.gearButton}
                     onPress={() => changeScreen('account')}
                 >
-                    <Image 
+                    <Image
                         style={styles.gear}
-                        source={require('../images/gear1.png')}/>
+                        source={require('../images/gear1.png')} />
                 </TouchableOpacity>
             </View>
             <View style={styles.profileContainer}>
