@@ -6,13 +6,13 @@ import Dashboard from './js/screens/Dashboard'
 import Profile from './js/screens/Profile'
 import Account from './js/screens/Account'
 import Gallery from './js/screens/Gallery'
-import { styles } from './js/components/Styles'
 import Footer from './js/components/Footer'
-import { View, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
-import { ViroARSceneNavigator } from 'react-viro';
+import { styles } from './js/components/Styles'
+import { View, ActivityIndicator, Alert } from 'react-native'
+import { ViroARSceneNavigator } from 'react-viro'
 import firebase from 'firebase'
 
-const InitialARScene = require('./js/ARPortals/MainScene.js');
+const InitialARScene = require('./js/ARPortals/MainScene.js')
 const baseURL = 'https://ar-travel-app.herokuapp.com/'
 
 const firebaseConfig = {
@@ -76,7 +76,6 @@ export default class ViroSample extends Component {
   }
 
 
-
   // SIGN UP
 
   goToSignUp = () => {
@@ -84,9 +83,14 @@ export default class ViroSample extends Component {
   }
 
   submitSignUp = () => {
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(error => this.showAlert(error))
-      .then(this.makeNewUser)
+    try {
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(this.makeNewUser)
+        .catch(error => alert(error.message))
+    }
+    catch (error) {
+      alert(error)
+    }
   }
 
   showAlert = (error) => {
@@ -148,7 +152,6 @@ export default class ViroSample extends Component {
   }
 
 
-
   // LOGIN
 
   goToLogin = () => {
@@ -156,9 +159,14 @@ export default class ViroSample extends Component {
   }
 
   submitLogin = () => {
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(error => this.showAlert(error))
-      .then(this.updateCurrentUser)
+    try {
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(this.updateCurrentUser)
+        .catch(error => alert(error.message))
+    }
+    catch (error) {
+      alert(error)
+    }
   }
 
   updateCurrentUser = () => {
@@ -168,7 +176,6 @@ export default class ViroSample extends Component {
     this.setState({ user: currentUser })
     this.setCurrentImages()
   }
-
 
 
   // UPDATE USER IMAGES
@@ -231,21 +238,24 @@ export default class ViroSample extends Component {
   }
 
 
-
-
   // DELETE ACCOUNT
 
   deleteAccount = () => {
-    firebase.auth().currentUser.delete()
-      .catch(error => this.showAlert(error))
-      .then(this.deleteBackendUser)
+    try {
+      firebase.auth().currentUser.delete()
+        .then(this.deleteBackendUser)
+        .catch(error => alert(error.message))
+    }
+    catch (error) {
+      alert(error)
+    }
   }
 
   deleteBackendUser = () => {
     fetch(`${baseURL}user/${this.state.user.id}`, {
       method: 'DELETE'
     })
-      .then(() => this.setState({ user: {} }))
+      .then(() => this.setState({ email: '', password: '' }))
       .then(this.changeScreen(''))
   }
 
@@ -253,9 +263,14 @@ export default class ViroSample extends Component {
   //  LOG OUT
 
   submitLogOut = () => {
+    try {
       firebase.auth().signOut()
         .then(this.resetState)
-        .catch(error => this.showAlert(error))
+        .catch(error => alert(error.message))
+    }
+    catch (error) {
+      alert(error)
+    }
   }
 
   resetState = () => {
@@ -264,10 +279,12 @@ export default class ViroSample extends Component {
   }
 
 
-
   // SCREEN NAVIGATION
 
   getSignUpOrLogInScreen = () => {
+    console.warn('user', this.state.user)
+    console.warn('email', this.state.email)
+    console.warn('password', this.state.password)
     return (
       <SignUpOrLogIn
         goToSignUp={this.goToSignUp}
@@ -358,10 +375,10 @@ export default class ViroSample extends Component {
   getGalleryScreen = () => {
     return (
       <View style={styles.containerWithFooter}>
-          <Gallery
-            handleChange={this.changeUserImage}
-            images={this.state.galleryImages}
-          /> 
+        <Gallery
+          handleChange={this.changeUserImage}
+          images={this.state.galleryImages}
+        />
       </View>
     )
   }
@@ -389,13 +406,13 @@ export default class ViroSample extends Component {
         return this.getAccountScreen()
       default:
         return (
-          <View style={styles.container}>
-            {this.state.images.length < 12 ?
-              <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
-              this.getSignUpOrLogInScreen()
-              // this.getProfileScreen()
-            }
-          </View>
+            this.getSignUpOrLogInScreen()
+          // <View style={styles.container}>
+          //   {this.state.images.length < 12 ?
+          //     <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
+          //     // this.getProfileScreen()
+          //   }
+          // </View>
         )
     }
   }
@@ -403,7 +420,8 @@ export default class ViroSample extends Component {
   render() {
     return (
       <>
-        {this.state.user === {} ? this.changeScreen('') : this.getScreen()}
+        {this.getScreen()}
+        {/* {this.state.user === {} ? this.changeScreen('') : this.getScreen()} */}
       </>
     )
   }

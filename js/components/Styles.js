@@ -13,7 +13,7 @@ const fonts = {
 
 const styles = StyleSheet.create({
 
-    
+
     // APP:
 
     containerWithFooter: {
@@ -137,8 +137,14 @@ const styles = StyleSheet.create({
 
     // AR:
 
-    ARTextStyle: {
+    ARText: {
         fontSize: 20,
+        color: colors.whiteish,
+        textAlignVertical: 'center',
+        textAlign: 'center'
+    },
+    ARLoadingText: {
+        fontSize: 30,
         color: colors.whiteish,
         textAlignVertical: 'center',
         textAlign: 'center'
