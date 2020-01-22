@@ -174,6 +174,8 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 40,
         marginBottom: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: colors.backgroundColor,
     },
 

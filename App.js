@@ -255,7 +255,7 @@ export default class ViroSample extends Component {
     fetch(`${baseURL}user/${this.state.user.id}`, {
       method: 'DELETE'
     })
-      .then(() => this.setState({ email: '', password: '' }))
+      .then(() => this.setState({ email: '', password: '', firstName: '' }))
       .then(this.changeScreen(''))
   }
 
@@ -274,7 +274,7 @@ export default class ViroSample extends Component {
   }
 
   resetState = () => {
-    this.setState({ email: '', password: '' })
+    this.setState({ email: '', password: '', firstName: '' })
     this.changeScreen('')
   }
 
@@ -282,9 +282,6 @@ export default class ViroSample extends Component {
   // SCREEN NAVIGATION
 
   getSignUpOrLogInScreen = () => {
-    console.warn('user', this.state.user)
-    console.warn('email', this.state.email)
-    console.warn('password', this.state.password)
     return (
       <SignUpOrLogIn
         goToSignUp={this.goToSignUp}
