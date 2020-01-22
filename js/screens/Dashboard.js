@@ -31,7 +31,7 @@ export default function Dashboard({ user, gif, changeScreen }) {
             <View style={styles.navBar}>
                 <TouchableOpacity
                     style={styles.buttons}
-                    onPress={() => changeScreen('profile')}
+                    onPress={() => changeScreen('AR')}
                 >
                     <Text style={styles.buttonText}>Yes!</Text>
                 </TouchableOpacity>

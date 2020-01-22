@@ -28,7 +28,6 @@ export default function Profile({ handleChange, changeScreen, user, currentImage
             />
             <View style={styles.gearContainer}>
                 <TouchableOpacity
-                    // style={styles.gearButton}
                     onPress={() => changeScreen('account')}
                 >
                     <Image
@@ -46,7 +45,7 @@ export default function Profile({ handleChange, changeScreen, user, currentImage
                     style={styles.buttons}
                     onPress={() => changeScreen('AR')}
                 >
-                    <Text style={styles.buttonText}>Go To My Portals</Text>
+                    <Text style={styles.buttonText}>My Portals</Text>
                 </TouchableOpacity>
             </View>
         </>

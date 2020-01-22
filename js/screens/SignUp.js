@@ -38,19 +38,20 @@ export default function SignUp({
                         style={styles.input}
                         placeholder='First Name'
                         returnKeyType='next'
-                        onSubmitEditing={() => this.passwordInput.focus()}
                         onChangeText={firstName => setFirstName(firstName)}
                         autoCorrect={false}
+                        onSubmitEditing={() => this.textInput.focus()}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder='Email'
                         returnKeyType='next'
-                        onSubmitEditing={() => this.passwordInput.focus()}
                         onChangeText={email => setEmail(email)}
                         keyboardType='email-address'
                         autoCapitalize='none'
                         autoCorrect={false}
+                        onSubmitEditing={() => this.passwordInput.focus()}
+                        ref={(input) => this.textInput = input}
                     />
                     <TextInput
                         style={styles.input}
@@ -58,6 +59,7 @@ export default function SignUp({
                         onChangeText={password => setPassword(password)}
                         secureTextEntry
                         returnKeyType='go'
+                        onSubmitEditing={submitSignUp}
                         ref={(input) => this.passwordInput = input}
                     />
                     <View style={styles.loginButtonContainer}>

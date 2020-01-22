@@ -49,10 +49,8 @@ export default class MainScene extends React.Component {
                 type="VRX"/>
             </ViroPortal>
             <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[1].url }} />
-            {/* <Viro360Image source={require("./portal_res/360_island.jpg")} /> */}
           </ViroPortalScene>
           <ViroText 
-            // text={'A Beach Somewhere'} 
             text={this.props.arSceneNavigator.viroAppProps[1].title} 
             scale={[.5, .5, .5]} 
             position={[0, -1, -2]} 
@@ -69,7 +67,6 @@ export default class MainScene extends React.Component {
                 rotation={[0, 45, 0]}
                 type="VRX"/>
             </ViroPortal>
-            {/* <Viro360Image source={require("./portal_res/wework-front-desk.jpeg")} /> */}
             <Viro360Image source={{ uri: this.props.arSceneNavigator.viroAppProps[0].url }} />
           </ViroPortalScene>
           <ViroText 

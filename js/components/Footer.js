@@ -13,7 +13,7 @@ export default function Footer ({ changeScreen }) {
                 style={styles.buttons}
                 onPress={() => changeScreen('profile')}
                 >
-                <Text style={styles.buttonText}>Back to Profile</Text>
+                <Text style={styles.buttonText}>My Profile</Text>
             </TouchableOpacity>
         </View>
     )

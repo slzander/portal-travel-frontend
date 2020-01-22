@@ -3,7 +3,6 @@ import { styles } from '../components/Styles'
 import {
     View,
     Text,
-    TextInput,
     TouchableOpacity,
     KeyboardAvoidingView,
     StatusBar

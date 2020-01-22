@@ -14,7 +14,7 @@ export default function ImageCard ({ image, handleChange }) {
                 <Image 
                     style={styles.image}
                     resizeMode={'contain'}
-                    source={{uri: image.url}}
+                    source={{uri: image.low_resolution_url}}
                 />
             </TouchableOpacity>
             <Text style={styles.imageText}>{image.title}</Text>
