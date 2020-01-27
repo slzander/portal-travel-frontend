@@ -6,9 +6,9 @@ Created by Stacey Zander.
 
 
 <p align="center">
-  <img src="/js/images/mainScreen.PNG" height: "300px", alt="Sublime's custom image"/>
+  <img src="/js/images/mainScreen.PNG" height: "300", alt="Sublime's custom image"/>
 </p>
-![](/js/images/mainScreen.PNG)
+###![](/js/images/mainScreen.PNG)
   
 ![](/js/images/portalGIF.gif)
 
