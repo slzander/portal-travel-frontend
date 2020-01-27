@@ -6,11 +6,11 @@ Created by Stacey Zander.
   
 
 <p align="center">
-  <img src="/js/images/mainScreen1.png" />
 </p>
 
 <p align="center">
   <img src="/js/images/portalGIF.gif" />
+  <img src="/js/images/mainScreen1.png" width="300" />
   <img src="/js/images/chooseImageGIF.gif" />
 </p>
   
