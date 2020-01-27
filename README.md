@@ -4,7 +4,7 @@ Users can choose from a variety of places to visit and are able to walk through 
 
 Created by Stacey Zander.
 
-![](/js/images/mainScreen.png)
+![](/js/images/mainScreen.PNG)
   
 ![](/js/images/portalGIF.gif)
 
