@@ -8,7 +8,7 @@ import Account from './js/screens/Account'
 import Gallery from './js/screens/Gallery'
 import Footer from './js/components/Footer'
 import { styles } from './js/components/Styles'
-import { View, ActivityIndicator, Alert } from 'react-native'
+import { View } from 'react-native'
 import { ViroARSceneNavigator } from 'react-viro'
 import firebase from 'firebase'
 
@@ -41,6 +41,7 @@ export default class ViroSample extends Component {
     user: {},
     oldImage: {},
     oldUserImage: {},
+    loading: false,
     gif: 'https://i.giphy.com/media/XHYqOOtGLB2K857Chh/giphy.gif'
   }
 
@@ -83,18 +84,24 @@ export default class ViroSample extends Component {
   }
 
   submitSignUp = () => {
-    try {
+    // try {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(this.makeNewUser)
-        .catch(error => alert(error.message))
-    }
-    catch (error) {
-      alert(error)
-    }
+        .catch(error => {
+          alert(error.message)
+          this.setState({ loading: false })
+        })
+        
+    // }
+    // catch (error) {
+    //   alert(error)
+    //   this.setState({ loading: false })
+    // }
   }
 
-  showAlert = (error) => {
-    Alert.alert(error.message)
+  changeSubmitLoading = () => {
+    this.setState({ loading: true })
+    this.submitSignUp()
   }
 
   makeNewUser = () => {
@@ -115,7 +122,11 @@ export default class ViroSample extends Component {
       })
     })
       .then(response => response.json())
-      .then(user => this.setState({ user, userImages: user.images }))
+      .then(user => this.setState({
+        user,
+        userImages: user.images,
+        users: [...this.state.users, user]
+      }))
       .then(this.setCurrentImages)
   }
 
@@ -159,14 +170,22 @@ export default class ViroSample extends Component {
   }
 
   submitLogin = () => {
-    try {
-      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(this.updateCurrentUser)
-        .catch(error => alert(error.message))
-    }
-    catch (error) {
-      alert(error)
-    }
+    // try {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(this.updateCurrentUser)
+      .catch(error => {
+        alert(error.message)
+        this.setState({ loading: false })
+      })
+    // }
+    // catch (error) {
+    //   alert(error)
+    // }
+  }
+
+  changeLoginLoading = () => {
+    this.setState({ loading: true })
+    this.submitLogin()
   }
 
   updateCurrentUser = () => {
@@ -241,14 +260,14 @@ export default class ViroSample extends Component {
   // DELETE ACCOUNT
 
   deleteAccount = () => {
-    try {
+    // try {
       firebase.auth().currentUser.delete()
         .then(this.deleteBackendUser)
         .catch(error => alert(error.message))
-    }
-    catch (error) {
-      alert(error)
-    }
+    // }
+    // catch (error) {
+    //   alert(error)
+    // }
   }
 
   deleteBackendUser = () => {
@@ -263,18 +282,18 @@ export default class ViroSample extends Component {
   //  LOG OUT
 
   submitLogOut = () => {
-    try {
+    // try {
       firebase.auth().signOut()
         .then(this.resetState)
         .catch(error => alert(error.message))
-    }
-    catch (error) {
-      alert(error)
-    }
+    // }
+    // catch (error) {
+    //   alert(error)
+    // }
   }
 
   resetState = () => {
-    this.setState({ email: '', password: '', firstName: '' })
+    this.setState({ email: '', password: '', firstName: '', loading: false })
     this.changeScreen('')
   }
 
@@ -291,24 +310,33 @@ export default class ViroSample extends Component {
   }
 
   getSignUpScreen = () => {
+    // this.setState({ loading: false })
     return (
       <SignUp
-        submitSignUp={this.submitSignUp}
+        firstName={this.state.firstName}
+        email={this.state.email}
+        password={this.state.password}
         setFirstName={this.setFirstName}
         setEmail={this.setEmail}
         setPassword={this.setPassword}
         goBack={this.goBack}
+        loading={this.state.loading}
+        changeLoading={this.changeSubmitLoading}
       />
     )
   }
 
   getLoginScreen = () => {
+    // this.setState({ loading: false })
     return (
       <Login
-        submitLogin={this.submitLogin}
+        email={this.state.email}
+        password={this.state.password}
         setEmail={this.setEmail}
         setPassword={this.setPassword}
         goBack={this.goBack}
+        loading={this.state.loading}
+        changeLoading={this.changeLoginLoading}
       />
     )
   }
@@ -403,7 +431,7 @@ export default class ViroSample extends Component {
         return this.getAccountScreen()
       default:
         return (
-            this.getSignUpOrLogInScreen()
+          this.getSignUpOrLogInScreen()
           // <View style={styles.container}>
           //   {this.state.images.length < 12 ?
           //     <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
