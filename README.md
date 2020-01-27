@@ -22,7 +22,7 @@ https://youtu.be/5k-zg8USoEk
 
   * React-Native
 
-  * ViroMedia
+  * Viro Media
   
   * Firebase Authentication
     
@@ -30,12 +30,18 @@ https://youtu.be/5k-zg8USoEk
 
 **Install Instructions:**
 
-1. Follow the instructions on this repo to run the frontend: https://github.com/slzander/migration-app-backend 
+1. Fork and clone this repo. Have current versions of Node and Npm installed.
 
-1. Have current versions of Node and Npm installed. Fork and clone this repo.
+2. Install the Viro Media iOS app on your iphone.
 
-2. Install packages by running the command 'npm install'.
+3. Install packages by running the command 'npm install'.
 
-3. cd into the ios directory and run 
+4. cd into the ios directory and run the command 'pod install'. 
 
-4. Run the command 'npm start'.
+5. cd back out into the root directory and run the command 'npm start'.
+
+6. Open the Viro Media app on your phone.
+
+7. Click on the dropdown menu in the top left corner of your screen, then Enter Testbed. Type in your IP address, and hit go.
+
+8. Sign up as a new user in Portal Travel, and enjoy!
