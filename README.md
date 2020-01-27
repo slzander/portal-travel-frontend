@@ -9,7 +9,7 @@ Created by Stacey Zander.
   <img src="/js/images/mainScreen.PNG" width: "100" />
 </p>
 
-![](/js/images/mainScreen.PNG =150)
+![](/js/images/mainScreen.PNG)
 
 ![](/js/images/portalGIF.gif)
 
