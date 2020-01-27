@@ -6,7 +6,7 @@ Created by Stacey Zander.
   
 
 <p align="center">
-  <img src="/js/images/mainScreen1.PNG" width: "10" />
+  <img src="/js/images/mainScreen1.png" width: "10" />
 </p>
 
 ![](/js/images/portalGIF.gif)
