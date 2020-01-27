@@ -4,6 +4,10 @@ Users can choose from a variety of places to visit and are able to walk through 
 
 Created by Stacey Zander.
 
+
+<p align="center">
+  <img src="/js/images/mainScreen.PNG" height: "300px", alt="Sublime's custom image"/>
+</p>
 ![](/js/images/mainScreen.PNG)
   
 ![](/js/images/portalGIF.gif)
