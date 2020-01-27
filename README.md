@@ -6,10 +6,8 @@ Created by Stacey Zander.
   
 
 <p align="center">
-  <img src="/js/images/mainScreen.PNG" width: "100" />
+  <img src="/js/images/mainScreen.PNG" width: "10" />
 </p>
-
-![](/js/images/mainScreen.PNG)
 
 ![](/js/images/portalGIF.gif)
 
