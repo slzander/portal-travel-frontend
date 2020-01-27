@@ -14,9 +14,6 @@ Created by Stacey Zander.
   <img src="/js/images/chooseImageGIF.gif" />
 </p>
   
-![](/js/images/portalGIF.gif) ![](/js/images/chooseImageGIF.gif)
-
-
 **Demo:**
 
 https://youtu.be/5k-zg8USoEk
