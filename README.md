@@ -10,7 +10,7 @@ Created by Stacey Zander.
 
 <p align="center">
   <img src="/js/images/portalGIF.gif" />
-  <img src="/js/images/mainScreen.PNG" />
+  <img src="/js/images/mainScreen.png" />
   <img src="/js/images/chooseImageGIF.gif" />
 </p>
   
