@@ -4,9 +4,12 @@ Users can choose from a variety of places to visit and are able to walk through 
 
 Created by Stacey Zander.
 
-https://media.giphy.com/media/XHYqOOtGLB2K857Chh/giphy.gif
+![](/js/images/mainScreen.png)
+  
+![](/js/images/portalGIF.gif)
 
-![background](/2.png)
+![](/js/images/chooseImageGIF.gif)
+  
   
 **Demo:**
 
