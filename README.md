@@ -3,18 +3,20 @@
 Users can choose from a variety of places to visit and are able to walk through portals to experience different locations as if they are really there!**
 
 Created by Stacey Zander.
-
+  
 
 <p align="center">
-  <img src="/js/images/mainScreen.PNG" height: "300", alt="Sublime's custom image"/>
+  <img src="/js/images/mainScreen.PNG" width: "100" />
 </p>
-###![](/js/images/mainScreen.PNG)
-  
+
+![](/js/images/mainScreen.PNG =150)
+
 ![](/js/images/portalGIF.gif)
 
 ![](/js/images/chooseImageGIF.gif)
   
-  
+
+
 **Demo:**
 
 
