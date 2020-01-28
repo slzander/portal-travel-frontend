@@ -11,8 +11,6 @@ import {
   Viro3DObject,
   ViroText
 } from 'react-viro'
-import { View, ActivityIndicator } from 'react-native';
-
 
 export default class MainScene extends React.Component {
   state = {

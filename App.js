@@ -84,19 +84,12 @@ export default class ViroSample extends Component {
   }
 
   submitSignUp = () => {
-    // try {
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(this.makeNewUser)
         .catch(error => {
           alert(error.message)
           this.setState({ loading: false })
         })
-        
-    // }
-    // catch (error) {
-    //   alert(error)
-    //   this.setState({ loading: false })
-    // }
   }
 
   changeSubmitLoading = () => {
@@ -170,17 +163,12 @@ export default class ViroSample extends Component {
   }
 
   submitLogin = () => {
-    // try {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(this.updateCurrentUser)
       .catch(error => {
         alert(error.message)
         this.setState({ loading: false })
       })
-    // }
-    // catch (error) {
-    //   alert(error)
-    // }
   }
 
   changeLoginLoading = () => {
@@ -260,14 +248,10 @@ export default class ViroSample extends Component {
   // DELETE ACCOUNT
 
   deleteAccount = () => {
-    // try {
       firebase.auth().currentUser.delete()
         .then(this.deleteBackendUser)
         .catch(error => alert(error.message))
-    // }
-    // catch (error) {
-    //   alert(error)
-    // }
+
   }
 
   deleteBackendUser = () => {
@@ -282,14 +266,9 @@ export default class ViroSample extends Component {
   //  LOG OUT
 
   submitLogOut = () => {
-    // try {
       firebase.auth().signOut()
         .then(this.resetState)
         .catch(error => alert(error.message))
-    // }
-    // catch (error) {
-    //   alert(error)
-    // }
   }
 
   resetState = () => {
@@ -310,7 +289,6 @@ export default class ViroSample extends Component {
   }
 
   getSignUpScreen = () => {
-    // this.setState({ loading: false })
     return (
       <SignUp
         firstName={this.state.firstName}
@@ -327,7 +305,6 @@ export default class ViroSample extends Component {
   }
 
   getLoginScreen = () => {
-    // this.setState({ loading: false })
     return (
       <Login
         email={this.state.email}
@@ -432,12 +409,6 @@ export default class ViroSample extends Component {
       default:
         return (
           this.getSignUpOrLogInScreen()
-          // <View style={styles.container}>
-          //   {this.state.images.length < 12 ?
-          //     <ActivityIndicator style={styles.indicator} size='large' color="#fff" /> :
-          //     // this.getProfileScreen()
-          //   }
-          // </View>
         )
     }
   }
@@ -446,7 +417,6 @@ export default class ViroSample extends Component {
     return (
       <>
         {this.getScreen()}
-        {/* {this.state.user === {} ? this.changeScreen('') : this.getScreen()} */}
       </>
     )
   }
